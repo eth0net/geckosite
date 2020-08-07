@@ -1,0 +1,20 @@
+version: "2"
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports: "80:80"
+    networks:
+      private:
+    depends_on:
+      - db
+  db:
+    image: postgres:alpine
+    restart: unless-stopped
+    ports: "5432:5432"
+    networks:
+      private:
+    volumes:
+      - "/var/lib/postgresql/data"
+networks:
+  private:

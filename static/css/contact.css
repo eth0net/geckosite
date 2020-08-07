@@ -1,0 +1,69 @@
+#contact-wrap {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#info-social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  flex: 1 1 45%;
+  margin: 1em;
+  padding: 1em;
+  /* border: 1px solid #563228; */
+  border-radius: 1em;
+  background-color: var(--secondary);
+  color: var(--text-secondary);
+}
+
+#info-social > p {
+  margin-bottom: 1em;
+}
+
+#info-social svg {
+  vertical-align: text-top;
+}
+
+#info {
+  display: flex;
+  flex-direction: column;
+}
+
+#social {
+  display: flex;
+  flex-direction: column;
+}
+
+#contact {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 45%;
+  margin: 1em;
+  padding: 1em;
+  /* border: 1px solid #563228; */
+  border-radius: 1em;
+  background-color: var(--secondary);
+  color: var(--text-secondary);
+}
+
+#contact > #user {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#contact > #user > * {
+  flex-grow: 1;
+}
+
+#contact > textarea {
+  height: 4em;
+  resize: none;
+}
+
+#contact input,
+#contact textarea,
+#contact button {
+  margin: 0.5em;
+  padding: 0.5em;
+}

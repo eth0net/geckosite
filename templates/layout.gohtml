@@ -1,0 +1,127 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{template "title"}} | Holly's Hatchlings</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icon/favicon-16x16.png">
+    <link rel="manifest" href="/static/icon/site.webmanifest">
+
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <script src="/static/js/main.js"></script>
+    {{template "head"}}
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <span class="spacer"></span>
+        {{/* <img src="/static/img/hhicon.png"> */}}
+        <a id="title" href="/">
+          <h1>Holly's Hatchlings</h1>
+        </a>
+        <svg
+          id="menu-button"
+          onclick="toggleNav()"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
+          focusable="false"
+          width="1em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 512 512"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="48"
+            d="M88 152h336"
+          />
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="48"
+            d="M88 256h336"
+          />
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="48"
+            d="M88 360h336"
+          />
+        </svg>
+        <svg
+          id="close-button"
+          class="nodisplay"
+          onclick="toggleNav()"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          aria-hidden="true"
+          focusable="false"
+          width="1em"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34z"
+            fill="currentColor"
+          />
+        </svg>
+        <nav id="navbar" class="nodisplay">
+          <div class="dropdown">
+            <a href="/geckos/crested">Crested Geckos</a>
+            <div class="submenu nodisplay">
+              <a href="/geckos/crested/pets">Pets</a>
+              <a href="/geckos/crested/breeders">Breeders</a>
+              <a href="/geckos/crested/available">Available</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a href="/geckos/gargoyle">Gargoyle Geckos</a>
+            <div class="submenu nodisplay">
+              <a href="/geckos/gargoyle/pets">Pets</a>
+              <a href="/geckos/gargoyle/breeders">Breeders</a>
+              <a href="/geckos/gargoyle/available">Available</a>
+            </div>
+          </div>
+          <div class="dropdown">
+            <a href="/geckos/leopard">Leopard Geckos</a>
+            <div class="submenu nodisplay">
+              <a href="/geckos/leopard/pets">Pets</a>
+              <a href="/geckos/leopard/breeders">Breeders</a>
+              <a href="/geckos/leopard/available">Available</a>
+            </div>
+          </div>
+          <a href="/about">About</a>
+          <a href="/blog">Blog</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        {{template "main"}}
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div id="license">
+          <p>&copy; Copyright 2020 Holly Hutt</p>
+          <p>Website by Elliot Thomas</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+{{end}}
