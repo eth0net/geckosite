@@ -1,0 +1,14 @@
+{{define "title"}}{{.Title}}{{end}}
+{{define "head"}}
+<link rel="stylesheet" href="/static/css/cards.css"/>
+{{end}}
+{{define "main"}}
+<div id="cardbox">
+  {{range .Cards}}
+    <a class="card" href="{{.Link}}">
+      <img src="{{.Image}}" alt="{{.Title}} image"/>
+      <h2>{{.Title}}</h2>
+    </a>
+  {{end}}
+</div>
+{{end}}

@@ -1,0 +1,18 @@
+{{define "title"}}{{.Name}}{{end}}
+{{define "head"}}
+<link rel="stylesheet" href="/static/css/animal.css"/>
+{{end}}
+{{define "main"}}
+Reference:   {{.Reference}}<br>
+Name:        {{.Name}}<br>
+Description: {{.Description}}<br>
+Species:     {{.Species.Name}}<br>
+Sex:         {{.Sex}}<br>
+Status:      {{.Status}}<br>
+Date Laid:   {{.DateLaid}}<br>
+Date Hatched:{{.DateHatched}}<br>
+Date Bought: {{.DateBought}}<br>
+Date Sold:   {{.DateSold}}<br>
+Father: {{.Father.Name}}<br>
+Mother: {{.Mother.Name}}<br>
+{{end}}

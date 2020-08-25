@@ -1,21 +1,16 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/gorilla/mux"
+	"github.com/raziel2244/geckosite/database"
+	"github.com/raziel2244/geckosite/router"
+	"github.com/raziel2244/geckosite/seed"
 )
 
 func main() {
-	r := mux.NewRouter()
+	seed.Rand()
 
-	fs := http.FileServer(http.Dir("static"))
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
-	r.Path("/favicon.ico").Handler(fs)
+	database.Init()
+	seed.Database()
 
-	r.Path("/").HandlerFunc(homeHandler)
-	r.Path("/about").HandlerFunc(aboutHandler)
-	r.Path("/contact").HandlerFunc(contactHandler)
-
-	http.ListenAndServe(":8080", r)
+	router.InitAndServe()
 }
