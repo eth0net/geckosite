@@ -19,6 +19,8 @@ func Init() *mux.Router {
 	once.Do(func() {
 		Router = mux.NewRouter()
 
+		Router.NotFoundHandler = http.HandlerFunc(notFound)
+
 		fs := http.FileServer(http.Dir("static"))
 		Router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 		Router.Path("/favicon.ico").Handler(fs)

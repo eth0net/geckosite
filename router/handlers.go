@@ -10,6 +10,13 @@ import (
 	"gorm.io/gorm/clause"
 )
 
+func notFound(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(404)
+	lp, hp := "templates/layout.gohtml", "templates/404.gohtml"
+	tmpl := template.Must(template.ParseFiles(lp, hp))
+	tmpl.ExecuteTemplate(w, "layout", nil)
+}
+
 func home(w http.ResponseWriter, r *http.Request) {
 	lp, hp := "templates/layout.gohtml", "templates/home.gohtml"
 	tmpl := template.Must(template.ParseFiles(lp, hp))
