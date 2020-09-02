@@ -1,11 +1,11 @@
 #about {
-  margin: 1em;
-  padding: 1em;
-  border-radius: 1em;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
   background-color: var(--secondary);
   color: var(--text-secondary);
 }
 
 #about > *:not(:last-child) {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5rem;
 }
