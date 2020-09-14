@@ -3,6 +3,7 @@ package router
 import (
 	"html/template"
 	"net/http"
+	"reflect"
 
 	"github.com/gorilla/mux"
 	"github.com/raziel2244/geckosite/database"
@@ -37,51 +38,140 @@ func contact(w http.ResponseWriter, r *http.Request) {
 
 func cards(w http.ResponseWriter, r *http.Request) {
 	type card struct{ Title, Image, Link string }
-
-	var cards = map[string]struct {
+	type page struct {
 		Title string
 		Cards []card
-	}{
-		"geckos": {"Geckos", []card{
-			{"Crested Geckos", "/static/img/hhicon.png", "/geckos/crested"},
-			{"Gargoyle Geckos", "/static/img/hhicon.png", "/geckos/gargoyle"},
-			{"Leopard Geckos", "/static/img/hhicon.png", "/geckos/leopard"},
-		}},
-		"crested": {"Crested Geckos", []card{
-			{"Pets", "/static/img/hhicon.png", "/geckos/crested/pets"},
-			{"Breeders", "/static/img/hhicon.png", "/geckos/crested/breeders"},
-			{"For Sale", "/static/img/hhicon.png", "/geckos/crested/sale"},
-		}},
-		"gargoyle": {"Gargoyle Geckos", []card{
-			{"Pets", "/static/img/hhicon.png", "/geckos/gargoyle/pets"},
-			{"Breeders", "/static/img/hhicon.png", "/geckos/gargoyle/breeders"},
-			{"For Sale", "/static/img/hhicon.png", "/geckos/gargoyle/sale"},
-		}},
-		"leopard": {"Leopard Geckos", []card{
-			{"Pets", "/static/img/hhicon.png", "/geckos/leopard/pets"},
-			{"Breeders", "/static/img/hhicon.png", "/geckos/leopard/breeders"},
-			{"For Sale", "/static/img/hhicon.png", "/geckos/leopard/sale"},
-		}},
+	}
+	type pageMap map[string]page
+
+	pages := map[string]pageMap{
+		"geckos": {
+			"": {"Geckos", []card{
+				{"Crested Geckos", "/static/img/hhicon.png", "/geckos/crested"},
+				{"Gargoyle Geckos", "/static/img/hhicon.png", "/geckos/gargoyle"},
+				{"Leopard Geckos", "/static/img/hhicon.png", "/geckos/leopard"},
+			}},
+			"crested": {"Crested Geckos", []card{
+				{"Our Animals", "/static/img/hhicon.png", "/geckos/crested/our-animals"},
+				{"Holdbacks", "/static/img/hhicon.png", "/geckos/crested/holdbacks"},
+				{"For Sale", "/static/img/hhicon.png", "/geckos/crested/for-sale"},
+			}},
+			"gargoyle": {"Gargoyle Geckos", []card{
+				{"Our Animals", "/static/img/hhicon.png", "/geckos/gargoyle/our-animals"},
+				{"Holdbacks", "/static/img/hhicon.png", "/geckos/gargoyle/holdbacks"},
+				{"For Sale", "/static/img/hhicon.png", "/geckos/gargoyle/for-sale"},
+			}},
+			"leopard": {"Leopard Geckos", []card{
+				{"Our Animals", "/static/img/hhicon.png", "/geckos/leopard/our-animals"},
+				{"Holdbacks", "/static/img/hhicon.png", "/geckos/leopard/holdbacks"},
+				{"For Sale", "/static/img/hhicon.png", "/geckos/leopard/for-sale"},
+			}},
+		},
 	}
 
-	data := cards[r.URL.Path[1:]]
-	if t := mux.Vars(r)["type"]; t != "" {
-		data = cards[t]
+	vars := mux.Vars(r)
+	o, t := vars["order"], vars["type"]
+
+	// No pages for order, return 404.
+	if _, ok := pages[o]; !ok {
+		notFound(w, r)
+		return
+	}
+
+	// No pages for order/type, return 404.
+	if _, ok := pages[o][t]; !ok {
+		notFound(w, r)
+		return
 	}
 
 	lp, hp := "templates/layout.gohtml", "templates/cards.gohtml"
 	tmpl := template.Must(template.ParseFiles(lp, hp))
+	tmpl.ExecuteTemplate(w, "layout", pages[o][t])
+}
+
+func ourAnimals(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	var species model.Species
+	where1 := &model.Species{Order: vars["order"], Type: vars["type"]}
+	database.DB.First(&species, where1)
+
+	var animals []*model.Animal
+	where2 := &model.Animal{SpeciesID: species.ID, Status: "Ours"}
+	database.DB.Find(&animals, where2)
+
+	data := struct {
+		Title   string
+		Animals []*model.Animal
+	}{
+		Title:   "Our Animals | " + species.Name + "s",
+		Animals: animals,
+	}
+
+	lp, hp := "templates/layout.gohtml", "templates/animals.gohtml"
+	tmpl := template.Must(template.ParseFiles(lp, hp))
 	tmpl.ExecuteTemplate(w, "layout", data)
 }
 
-func animals(w http.ResponseWriter, r *http.Request) {
-	// data := struct{}{}
+func holdbacks(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
 
+	var species model.Species
+	where1 := &model.Species{Order: vars["order"], Type: vars["type"]}
+	database.DB.First(&species, where1)
+
+	var animals []*model.Animal
+	where2 := &model.Animal{SpeciesID: species.ID, Status: "Hold"}
+	database.DB.Find(&animals, where2)
+
+	data := struct {
+		Title   string
+		Animals []*model.Animal
+	}{
+		Title:   "Holdbacks | " + species.Name + "s",
+		Animals: animals,
+	}
+
+	lp, hp := "templates/layout.gohtml", "templates/animals.gohtml"
+	tmpl := template.Must(template.ParseFiles(lp, hp))
+	tmpl.ExecuteTemplate(w, "layout", data)
+}
+
+func forSale(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	var species model.Species
+	where1 := &model.Species{Order: vars["order"], Type: vars["type"]}
+	database.DB.First(&species, where1)
+
+	var animals []*model.Animal
+	where2 := &model.Animal{SpeciesID: species.ID, Status: "Sale"}
+	database.DB.Find(&animals, where2)
+
+	data := struct {
+		Title   string
+		Animals []*model.Animal
+	}{
+		Title:   "For Sale | " + species.Name + "s",
+		Animals: animals,
+	}
+
+	lp, hp := "templates/layout.gohtml", "templates/animals.gohtml"
+	tmpl := template.Must(template.ParseFiles(lp, hp))
+	tmpl.ExecuteTemplate(w, "layout", data)
 }
 
 func animal(w http.ResponseWriter, r *http.Request) {
 	var data model.Animal
-	database.DB.Preload(clause.Associations).First(&data, "id = ?", mux.Vars(r)["id"])
+	database.DB.Model(&model.Animal{}).
+		Preload(clause.Associations).
+		Where("id = ?", mux.Vars(r)["id"]).
+		First(&data)
+
+	if reflect.ValueOf(data).IsZero() {
+		notFound(w, r)
+		return
+	}
 
 	lp, hp := "templates/layout.gohtml", "templates/animal.gohtml"
 	tmpl := template.Must(template.ParseFiles(lp, hp))

@@ -12,14 +12,14 @@ type Animal struct {
 	Common
 
 	// Details specific to the animal.
-	Reference   string     `json:"reference,omitEmpty"`
-	Name        string     `json:"name,omitEmpty"`
-	Description string     `json:"description,omitEmpty"`
-	Images      []*Image   `json:"images" gorm:"many2many:animal_images;"`
+	Reference   string     `json:"reference"`
+	Name        string     `json:"name"`
+	Description string     `json:"description"`
+	Image       string     `json:"image"`
 	Species     *Species   `json:"species"`
 	SpeciesID   *uuid.UUID `json:"-" gorm:"not null"`
 	Sex         string     `json:"sex" gorm:"default:Unknown;not null;check:sex IN ('Male','Female','Unknown')"`
-	Status      string     `json:"status" gorm:"default:Pet;not null;check:status IN ('Pet','Breeder','Sale')"`
+	Status      string     `json:"status" gorm:"default:Ours;not null;check:status IN ('Ours','Hold','Sale')"`
 
 	// Important dates for our records.
 	DateLaid    *time.Time `json:"dateLaid"`
@@ -39,4 +39,5 @@ type Animal struct {
 
 	// Traits         []*Gene `json:"traits"`
 	// PossibleTraits []*Gene `json:"possibleTraits"`
+	// Images      []*Image   `json:"images" gorm:"many2many:animal_images;"`
 }

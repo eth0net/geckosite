@@ -30,12 +30,12 @@ func Init() *mux.Router {
 		Router.Path("/contact").HandlerFunc(contact)
 
 		/// use {order} for geckos / snakes
-		Router.Path("/geckos").HandlerFunc(cards)
-		Router.Path("/geckos/{type}").HandlerFunc(cards)
-		Router.Path("/geckos/{type}/pets").HandlerFunc(animals)
-		Router.Path("/geckos/{type}/breeders").HandlerFunc(animals)
-		Router.Path("/geckos/{type}/for-sale").HandlerFunc(animals)
-		Router.Path("/geckos/{type}/{id}").HandlerFunc(animal)
+		Router.Path("/{order}").HandlerFunc(cards)
+		Router.Path("/{order}/{type}").HandlerFunc(cards)
+		Router.Path("/{order}/{type}/our-animals").HandlerFunc(ourAnimals)
+		Router.Path("/{order}/{type}/holdbacks").HandlerFunc(holdbacks)
+		Router.Path("/{order}/{type}/for-sale").HandlerFunc(forSale)
+		Router.Path("/{order}/{type}/{id}").HandlerFunc(animal)
 	})
 
 	return Router
