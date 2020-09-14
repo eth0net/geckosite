@@ -3,16 +3,70 @@
 <link rel="stylesheet" href="/static/css/animal.css"/>
 {{end}}
 {{define "main"}}
-Reference:   {{.Reference}}<br>
-Name:        {{.Name}}<br>
-Description: {{.Description}}<br>
-Species:     {{.Species.Name}}<br>
-Sex:         {{.Sex}}<br>
-Status:      {{.Status}}<br>
-Date Laid:   {{.DateLaid}}<br>
-Date Hatched:{{.DateHatched}}<br>
-Date Bought: {{.DateBought}}<br>
-Date Sold:   {{.DateSold}}<br>
-Father: {{.Father.Name}}<br>
-Mother: {{.Mother.Name}}<br>
+<div id="animal">
+  <img src="{{.Image}}"/>
+  <div id="details">
+    <h2 id="title">{{.Name}} - {{.Species.Name}}</h2>
+    <p id="species">{{.Species.LatinName}}</p>
+    <p id="description">{{.Description}}</p>
+    <div id="list">
+      <h3>Reference:</h3>
+      <span>{{.Reference}}</span>
+      <h3>Species:</h3>
+      <span>{{.Species.Name}}</span>
+      <h3>Sex:</h3>
+      <span>{{.Sex}}</span>
+      <h3>Status:</h3>
+      <span>{{.Status}}</span>
+      <h3>Lay Date:</h3>
+      <span>
+        {{if .DateLaid}}
+          {{.DateLaid.Format "02/01/2006"}}
+        {{else}}
+          N/A
+        {{end}}
+      </span>
+      <h3>Hatch Date:</h3>
+      <span>
+        {{if .DateHatched}}
+          {{.DateHatched.Format "02/01/2006"}}
+        {{else}}
+          N/A
+        {{end}}
+      </span>
+      <h3>Purchase Date:</h3>
+      <span>
+        {{if .DateBought}}
+          {{.DateBought.Format "02/01/2006"}}
+        {{else}}
+          N/A
+        {{end}}
+      </span>
+      <h3>Sale Date:</h3>
+      <span>
+        {{if .DateSold}}
+          {{.DateSold.Format "02/01/2006"}}
+        {{else}}
+          N/A
+        {{end}}
+      </span>
+      <h3>Father:</h3>
+      <span>
+        {{if .Father}}
+          <a href="{{.Father.ID}}">{{.Father.Name}}</a>
+        {{else}}
+          N/A
+        {{end}}
+      </span>
+      <h3>Mother:</h3>
+      <span>
+        {{if .Mother}}
+          <a href="{{.Mother.ID}}">{{.Mother.Name}}</a>
+        {{else}}
+          N/A
+        {{end}}
+      </span>
+    </div>
+  </div>
+</div>
 {{end}}
