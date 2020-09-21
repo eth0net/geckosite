@@ -4,7 +4,11 @@
 {{end}}
 {{define "main"}}
 <div id="animal">
-  <img src="{{.Image}}"/>
+  <div id="gallery">
+    {{range .Images}}
+    <img src="{{.FilePath}}/{{.FileName}}"/>
+    {{end}}
+  </div>
   <div id="details">
     <h2 id="title">{{.Name}} - {{.Species.Name}}</h2>
     <p id="species">{{.Species.LatinName}}</p>

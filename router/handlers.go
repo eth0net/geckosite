@@ -97,8 +97,10 @@ func ourAnimals(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&species, where1)
 
 	var animals []*model.Animal
-	where2 := &model.Animal{SpeciesID: species.ID, Status: "Ours"}
-	database.DB.Find(&animals, where2)
+	database.DB.Preload("Images").
+		Where("species_id = ? AND status IN ('Non-Breeder','Breeder','Future Breeder')", species.ID).
+		Order("name ASC").
+		Find(&animals)
 
 	data := struct {
 		Title   string
@@ -121,8 +123,8 @@ func holdbacks(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&species, where1)
 
 	var animals []*model.Animal
-	where2 := &model.Animal{SpeciesID: species.ID, Status: "Hold"}
-	database.DB.Find(&animals, where2)
+	where2 := &model.Animal{SpeciesID: species.ID, Status: "Holdback"}
+	database.DB.Preload("Images").Find(&animals, where2)
 
 	data := struct {
 		Title   string
@@ -145,8 +147,8 @@ func forSale(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&species, where1)
 
 	var animals []*model.Animal
-	where2 := &model.Animal{SpeciesID: species.ID, Status: "Sale"}
-	database.DB.Find(&animals, where2)
+	where2 := &model.Animal{SpeciesID: species.ID, Status: "For Sale"}
+	database.DB.Preload("Images").Find(&animals, where2)
 
 	data := struct {
 		Title   string

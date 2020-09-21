@@ -15,11 +15,11 @@ type Animal struct {
 	Reference   string     `json:"reference"`
 	Name        string     `json:"name"`
 	Description string     `json:"description"`
-	Image       string     `json:"image"`
+	Images      []*Image   `json:"images"`
 	Species     *Species   `json:"species"`
 	SpeciesID   *uuid.UUID `json:"-" gorm:"not null"`
 	Sex         string     `json:"sex" gorm:"default:Unknown;not null;check:sex IN ('Male','Female','Unknown')"`
-	Status      string     `json:"status" gorm:"default:Ours;not null;check:status IN ('Ours','Hold','Sale')"`
+	Status      string     `json:"status" gorm:"not null;check:status IN ('Non-Breeder','Breeder','Future Breeder','Holdback','For Sale')"`
 
 	// Important dates for our records.
 	DateLaid    *time.Time `json:"dateLaid"`
@@ -39,5 +39,4 @@ type Animal struct {
 
 	// Traits         []*Gene `json:"traits"`
 	// PossibleTraits []*Gene `json:"possibleTraits"`
-	// Images      []*Image   `json:"images" gorm:"many2many:animal_images;"`
 }

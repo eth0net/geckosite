@@ -45,40 +45,75 @@ func Database() {
 	}
 	database.DB.Create(species)
 
-	d1, _ := time.Parse(dateFormat, "2020-03-20")
-	a1 := &model.Animal{
+	date1, _ := time.Parse(dateFormat, "2020-03-20")
+	animal1 := &model.Animal{
 		Name:        "Flick",
 		Description: "Red and black",
-		Image:       "/static/img/contact.jpg",
-		Species:     species,
-		Sex:         "Male",
-		DateBought:  &d1,
+		Images: []*model.Image{
+			{
+				FileName: "Flick-1150064.jpg",
+				FilePath: "/static/img/geckos/gargoyle/Flick",
+			},
+			{
+				FileName: "Flick-1150056.jpg",
+				FilePath: "/static/img/geckos/gargoyle/Flick",
+			},
+			{
+				FileName: "Flick-1150005.jpg",
+				FilePath: "/static/img/geckos/gargoyle/Flick",
+			},
+			{
+				FileName: "Flick-1150039.jpg",
+				FilePath: "/static/img/geckos/gargoyle/Flick",
+			},
+		},
+		Species:    species,
+		Sex:        "Male",
+		Status:     "Breeder",
+		DateBought: &date1,
 	}
-	database.DB.Create(a1)
+	database.DB.Create(animal1)
 
-	a2 := &model.Animal{
+	animal2 := &model.Animal{
 		Name:        "Echo",
 		Description: "White and black with orange patches",
-		Image:       "/static/img/contact.jpg",
-		Species:     species,
-		Sex:         "Female",
-		DateBought:  &d1,
+		Images: []*model.Image{
+			{
+				FilePath: "/static/img/geckos/gargoyle/Echo",
+				FileName: "P1140751.jpg",
+			},
+			{
+				FilePath: "/static/img/geckos/gargoyle/Echo",
+				FileName: "P1140764.jpg",
+			},
+			{
+				FilePath: "/static/img/geckos/gargoyle/Echo",
+				FileName: "P1140764.jpg",
+			},
+			{
+				FilePath: "/static/img/geckos/gargoyle/Echo",
+				FileName: "P1140764.jpg",
+			},
+		},
+		Species:    species,
+		Sex:        "Female",
+		Status:     "Breeder",
+		DateBought: &date1,
 	}
-	database.DB.Create(a2)
+	database.DB.Create(animal2)
 
-	d2, _ := time.Parse(dateFormat, "2020-06-13")
-	d3, _ := time.Parse(dateFormat, "2020-07-21")
-	a3 := &model.Animal{
+	date2, _ := time.Parse(dateFormat, "2020-06-13")
+	date3, _ := time.Parse(dateFormat, "2020-07-21")
+	animal3 := &model.Animal{
 		Reference:   "2020/GG1",
 		Name:        "Wyvern",
 		Description: "Black and orange",
-		Image:       "/static/img/contact.jpg",
 		Species:     species,
-		Status:      "Hold",
-		DateLaid:    &d2,
-		DateHatched: &d3,
-		Father:      a1,
-		Mother:      a2,
+		Status:      "Holdback",
+		DateLaid:    &date2,
+		DateHatched: &date3,
+		Father:      animal1,
+		Mother:      animal2,
 	}
-	database.DB.Create(a3)
+	database.DB.Create(animal3)
 }
