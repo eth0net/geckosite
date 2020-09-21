@@ -170,3 +170,15 @@ footer > .container {
 .nooverflow {
   overflow: hidden;
 }
+
+@media screen and (max-width: 400px) {
+  header > .container > #title > h1 {
+    font-size: 1.75em;
+  }
+}
+
+@media screen and (max-width: 355px) {
+  header > .container > #title > h1 {
+    font-size: 1.5em;
+  }
+}
