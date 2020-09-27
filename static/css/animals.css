@@ -1,6 +1,9 @@
 #cardbox {
   display: grid;
   grid-template-columns: repeat(auto-fit, 250px);
+  grid-gap: 1rem;
+  margin: 1rem;
+  justify-content: center;
 }
 
 #cardbox > .card {
