@@ -43,6 +43,7 @@ func Init() *mux.Router {
 
 // Serve starts a http server using the router.
 func Serve() {
+	log.Println("Starting server on http://localhost:8080")
 	if err := http.ListenAndServe(":8080", Router); err != nil {
 		log.Panic("failed to start server from router", err)
 	}
