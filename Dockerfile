@@ -1,5 +1,8 @@
 FROM golang:1.15-alpine AS builder
 WORKDIR /build
+COPY go.mod .
+RUN go mod download
+RUN go mod verify
 COPY . .
 RUN go build -o main
 
