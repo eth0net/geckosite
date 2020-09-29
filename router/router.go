@@ -28,6 +28,7 @@ func Init() *mux.Router {
 		Router.Path("/").HandlerFunc(home)
 		Router.Path("/about").HandlerFunc(about)
 		Router.Path("/contact").HandlerFunc(contact)
+		Router.Path("/blog").HandlerFunc(construction)
 
 		/// use {order} for geckos / snakes
 		Router.Path("/{order}").HandlerFunc(cards)

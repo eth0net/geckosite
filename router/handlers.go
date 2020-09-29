@@ -13,9 +13,26 @@ import (
 
 func notFound(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(404)
-	lp, hp := "templates/layout.gohtml", "templates/404.gohtml"
+
+	data := struct{ Title, Message string }{
+		"Not found",
+		"Error 404: Page not found",
+	}
+
+	lp, hp := "templates/layout.gohtml", "templates/message.gohtml"
 	tmpl := template.Must(template.ParseFiles(lp, hp))
-	tmpl.ExecuteTemplate(w, "layout", nil)
+	tmpl.ExecuteTemplate(w, "layout", data)
+}
+
+func construction(w http.ResponseWriter, r *http.Request) {
+	data := struct{ Title, Message string }{
+		"Under Construction",
+		"Page is currently under construction",
+	}
+
+	lp, hp := "templates/layout.gohtml", "templates/message.gohtml"
+	tmpl := template.Must(template.ParseFiles(lp, hp))
+	tmpl.ExecuteTemplate(w, "layout", data)
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
