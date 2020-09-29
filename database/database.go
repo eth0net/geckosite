@@ -1,11 +1,13 @@
 package database
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"sync"
 
 	"github.com/raziel2244/geckosite/database/model"
-	"gorm.io/driver/sqlite"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -18,11 +20,17 @@ var (
 // Init opens a database connection and performs migrations.
 func Init() *gorm.DB {
 	once.Do(func() {
+		dsn := fmt.Sprintf(
+			"host=%v dbname=%v user=%v password=%v",
+			os.Getenv("DB_HOST"), os.Getenv("DB_NAME"),
+			os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"),
+		)
+
 		var err error
-		DB, err = gorm.Open(sqlite.Open("store.db"), &gorm.Config{})
+		DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 		if err != nil {
-			log.Panic("failed to connect to database", err)
+			log.Panic("failed to connect to database")
 		}
 
 		DB.AutoMigrate(

@@ -1,20 +1,52 @@
-version: "2"
+version: "3"
 services:
   app:
     build: .
     restart: unless-stopped
-    ports: "80:80"
-    networks:
-      private:
     depends_on:
       - db
+      - minio
+    networks:
+      - web
+      - private
+    environment:
+      DB_HOST: db
+      DB_NAME: geckosite
+      DB_USER: geckosite
+      DB_PASSWORD: geckosite
+      MINIO_ACCESS_KEY: geckosite
+      MINIO_SECRET_KEY: geckosite
   db:
     image: postgres:alpine
     restart: unless-stopped
-    ports: "5432:5432"
     networks:
-      private:
+      - private
     volumes:
-      - "/var/lib/postgresql/data"
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: geckosite
+      POSTGRES_USER: geckosite
+      POSTGRES_PASSWORD: geckosite
+  minio:
+    image: minio/minio
+    restart: unless-stopped
+    command: server /data
+    networks:
+      - private
+    volumes:
+      - minio_data:/data
+    environment:
+      MINIO_ACCESS_KEY: geckosite
+      MINIO_SECRET_KEY: geckosite
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
 networks:
   private:
+  web:
+    external: true
+volumes:
+  db_data:
+  minio_data:
