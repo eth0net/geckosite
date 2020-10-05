@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	"github.com/gorilla/mux"
+	"github.com/raziel2244/geckosite/router/handlers"
 )
 
 var (
@@ -19,24 +20,24 @@ func Init() *mux.Router {
 	once.Do(func() {
 		Router = mux.NewRouter()
 
-		Router.NotFoundHandler = http.HandlerFunc(notFound)
+		Router.NotFoundHandler = http.HandlerFunc(handlers.NotFound)
 
 		fs := http.FileServer(http.Dir("static"))
 		Router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 		Router.Path("/favicon.ico").Handler(fs)
 
-		Router.Path("/").HandlerFunc(home)
-		Router.Path("/about").HandlerFunc(about)
-		Router.Path("/contact").HandlerFunc(contact)
-		Router.Path("/blog").HandlerFunc(construction)
+		Router.Path("/").HandlerFunc(handlers.Home)
+		Router.Path("/about").HandlerFunc(handlers.About)
+		Router.Path("/contact").HandlerFunc(handlers.Contact)
+		Router.Path("/blog").HandlerFunc(handlers.Construction)
 
 		/// use {order} for geckos / snakes
-		Router.Path("/{order}").HandlerFunc(cards)
-		Router.Path("/{order}/{type}").HandlerFunc(cards)
-		Router.Path("/{order}/{type}/our-animals").HandlerFunc(ourAnimals)
-		Router.Path("/{order}/{type}/holdbacks").HandlerFunc(holdbacks)
-		Router.Path("/{order}/{type}/for-sale").HandlerFunc(forSale)
-		Router.Path("/{order}/{type}/{id}").HandlerFunc(animal)
+		Router.Path("/{order}").HandlerFunc(handlers.Cards)
+		Router.Path("/{order}/{type}").HandlerFunc(handlers.Cards)
+		Router.Path("/{order}/{type}/personal").HandlerFunc(handlers.Personal)
+		Router.Path("/{order}/{type}/holdbacks").HandlerFunc(handlers.Holdbacks)
+		Router.Path("/{order}/{type}/for-sale").HandlerFunc(handlers.ForSale)
+		Router.Path("/{order}/{type}/{id}").HandlerFunc(handlers.Animal)
 	})
 
 	return Router
