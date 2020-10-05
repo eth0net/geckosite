@@ -8,5 +8,5 @@ RUN go build -o main
 
 FROM alpine:3.11.3
 COPY --from=builder /build/main /app/main
-EXPOSE 8080
+EXPOSE 80
 CMD ["/app/main"]
