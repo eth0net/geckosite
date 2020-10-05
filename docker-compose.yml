@@ -33,6 +33,8 @@ services:
     image: minio/minio
     restart: unless-stopped
     command: server /data
+    ports:
+      - "9000:9000"
     networks:
       - private
     volumes:
