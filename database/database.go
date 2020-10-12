@@ -37,7 +37,6 @@ func Init() *gorm.DB {
 			&model.Animal{},
 			&model.Species{},
 			&model.Trait{},
-			&model.Image{},
 		)
 	})
 

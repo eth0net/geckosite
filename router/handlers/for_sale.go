@@ -19,7 +19,7 @@ func ForSale(w http.ResponseWriter, r *http.Request) {
 
 	var animals []*model.Animal
 	where2 := &model.Animal{SpeciesID: species.ID, Status: "For Sale"}
-	database.DB.Preload("Images").Find(&animals, where2)
+	database.DB.Find(&animals, where2)
 
 	data := struct {
 		Title   string

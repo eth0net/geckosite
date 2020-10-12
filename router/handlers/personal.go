@@ -18,7 +18,7 @@ func Personal(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&species, where1)
 
 	var animals []*model.Animal
-	database.DB.Preload("Images").
+	database.DB.
 		Where("species_id = ? AND status IN ('Non-Breeder','Breeder','Future Breeder')", species.ID).
 		Order("name ASC").
 		Find(&animals)

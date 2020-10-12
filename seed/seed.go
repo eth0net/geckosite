@@ -23,14 +23,11 @@ func Database() {
 		&model.Animal{},
 		&model.Species{},
 		&model.Trait{},
-		&model.Image{},
-		"animal_images",
 	)
 	err = database.DB.AutoMigrate(
 		&model.Animal{},
 		&model.Species{},
 		&model.Trait{},
-		&model.Image{},
 	)
 	if err != nil {
 		log.Panicln("Failed to seed DB", err)
@@ -49,56 +46,20 @@ func Database() {
 	animal1 := &model.Animal{
 		Name:        "Flick",
 		Description: "Red and black",
-		Images: []*model.Image{
-			{
-				FileName: "Flick-1150064.jpg",
-				FilePath: "/static/img/geckos/gargoyle/Flick",
-			},
-			{
-				FileName: "Flick-1150056.jpg",
-				FilePath: "/static/img/geckos/gargoyle/Flick",
-			},
-			{
-				FileName: "Flick-1150005.jpg",
-				FilePath: "/static/img/geckos/gargoyle/Flick",
-			},
-			{
-				FileName: "Flick-1150039.jpg",
-				FilePath: "/static/img/geckos/gargoyle/Flick",
-			},
-		},
-		Species:    species,
-		Sex:        "Male",
-		Status:     "Breeder",
-		DateBought: &date1,
+		Species:     species,
+		Sex:         "Male",
+		Status:      "Breeder",
+		DateBought:  &date1,
 	}
 	database.DB.Create(animal1)
 
 	animal2 := &model.Animal{
 		Name:        "Echo",
 		Description: "White and black with orange patches",
-		Images: []*model.Image{
-			{
-				FilePath: "/static/img/geckos/gargoyle/Echo",
-				FileName: "P1140751.jpg",
-			},
-			{
-				FilePath: "/static/img/geckos/gargoyle/Echo",
-				FileName: "P1140764.jpg",
-			},
-			{
-				FilePath: "/static/img/geckos/gargoyle/Echo",
-				FileName: "P1140764.jpg",
-			},
-			{
-				FilePath: "/static/img/geckos/gargoyle/Echo",
-				FileName: "P1140764.jpg",
-			},
-		},
-		Species:    species,
-		Sex:        "Female",
-		Status:     "Breeder",
-		DateBought: &date1,
+		Species:     species,
+		Sex:         "Female",
+		Status:      "Breeder",
+		DateBought:  &date1,
 	}
 	database.DB.Create(animal2)
 

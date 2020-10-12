@@ -15,7 +15,7 @@ type Animal struct {
 	Reference   string     `json:"reference"`
 	Name        string     `json:"name"`
 	Description string     `json:"description"`
-	Images      []*Image   `json:"images"`
+	Images      []string   `json:"images" gorm:"-"`
 	Species     *Species   `json:"species"`
 	SpeciesID   *uuid.UUID `json:"-" gorm:"not null"`
 	Sex         string     `json:"sex" gorm:"default:Unknown;not null;check:sex IN ('Male','Female','Unknown')"`
