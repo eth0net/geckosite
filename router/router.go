@@ -23,6 +23,10 @@ func Init() *mux.Router {
 		Router.NotFoundHandler = http.HandlerFunc(handlers.NotFound)
 
 		fs := http.FileServer(http.Dir("static"))
+
+		s3Handler := http.StripPrefix("/s3/", http.HandlerFunc(handlers.S3))
+		Router.PathPrefix("/s3/{bucket}").Handler(s3Handler)
+
 		Router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 		Router.Path("/favicon.ico").Handler(fs)
 
