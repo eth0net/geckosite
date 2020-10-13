@@ -1,0 +1,17 @@
+#home {
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--secondary);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+#home > *:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+#cardbox {
+  margin: 0;
+  justify-content: space-between;
+}
