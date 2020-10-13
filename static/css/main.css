@@ -1,16 +1,11 @@
 @font-face {
-  font-family: Get Show;
-  src: url(/static/font/get-show.ttf);
-}
-
-@font-face {
-  font-family: Sofia;
-  src: url(/static/font/Sofia-Regular.ttf);
-}
-
-@font-face {
   font-family: Roboto Mono;
   src: url(/static/font/RobotoMono-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: Londrina;
+  src: url(/static/font/LondrinaSolid-Regular.ttf);
 }
 
 :root {
@@ -51,7 +46,7 @@ body {
 header {
   color: var(--text-primary);
   background-color: var(--primary);
-  font-family: Sofia;
+  font-family: Londrina;
   width: 100%;
 }
 
