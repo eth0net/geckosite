@@ -22,6 +22,21 @@
   flex-grow: 1;
 }
 
-#cardbox > .card > h2 {
+#cardbox > .card > .info {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+#cardbox > .card > .info > * {
   margin: 1rem;
+}
+
+#cardbox > .card > .info > .spacer {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+#cardbox > .card > .info > svg {
+  font-size: 1.5rem;
 }
