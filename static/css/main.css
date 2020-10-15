@@ -4,14 +4,14 @@
 }
 
 :root {
-  --primary: #5fb5a8;
+  --primary: #ff9e00;
   --text-primary: #ffffff;
-  --secondary: #7ed8cd;
+  --secondary: #ffb844;
   --text-secondary: #ffffff;
 
-  --bg1: #fdd3dd;
-  --bg2: #f3bdca;
-  --bg3: #f49da3;
+  --bg1: #ffecbe;
+  --bg2: #fede8b;
+  --bg3: #ffecbe;
 }
 
 * {
