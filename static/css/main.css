@@ -40,13 +40,13 @@ body {
   background: rgb(244, 157, 163);
   background: linear-gradient(var(--bg1), var(--bg2), var(--bg3));
   color: white;
+  font-family: Londrina;
   min-height: 100vh;
 }
 
 header {
   color: var(--text-primary);
   background-color: var(--primary);
-  font-family: Londrina;
   width: 100%;
 }
 
@@ -125,7 +125,6 @@ main > .container > img {
 footer {
   color: var(--text-primary);
   background-color: var(--primary);
-  font-family: Roboto Mono;
   font-size: 0.75rem;
   width: 100%;
 }
