@@ -3,6 +3,16 @@
   src: url(/static/font/LondrinaSolid-Regular.ttf);
 }
 
+@font-face {
+  font-family: Londrina Light;
+  src: url(/static/font/LondrinaSolid-Light.ttf);
+}
+
+@font-face {
+  font-family: Londrina Thin;
+  src: url(/static/font/LondrinaSolid-Thin.ttf);
+}
+
 :root {
   --primary: #ff9e00;
   --text-primary: #ffffff;
