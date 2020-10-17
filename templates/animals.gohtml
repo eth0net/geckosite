@@ -16,7 +16,7 @@
     />
     <div class="info">
       <span class="spacer"></span>
-      <h2>{{.Name}}</h2>
+      <h2>{{with .Name}}{{.}}{{else}}...{{end}}</h2>
       {{if eq .Sex "Male"}}
       {{/* ion male */}}
       <svg
