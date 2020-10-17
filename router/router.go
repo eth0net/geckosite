@@ -38,10 +38,7 @@ func Init() *mux.Router {
 		/// use {order} for geckos / snakes
 		Router.Path("/{order}").HandlerFunc(handlers.Cards)
 		Router.Path("/{order}/{type}").HandlerFunc(handlers.Cards)
-		Router.Path("/{order}/{type}/personal").HandlerFunc(handlers.Personal)
-		Router.Path("/{order}/{type}/holdbacks").HandlerFunc(handlers.Holdbacks)
-		Router.Path("/{order}/{type}/for-sale").HandlerFunc(handlers.ForSale)
-		Router.Path("/{order}/{type}/{id}").HandlerFunc(handlers.Animal)
+		Router.Path("/{order}/{type}/{id}").HandlerFunc(handlers.Animals)
 	})
 
 	return Router
