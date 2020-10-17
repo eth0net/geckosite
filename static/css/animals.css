@@ -26,10 +26,16 @@
   display: flex;
   flex-flow: row;
   align-items: center;
+  width: 100%;
 }
 
 #cardbox > .card > .info > * {
   margin: 1rem;
+}
+
+#cardbox > .card > .info > h2 {
+  flex-grow: 1;
+  text-align: center;
 }
 
 #cardbox > .card > .info > .spacer {
