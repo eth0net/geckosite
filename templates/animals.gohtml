@@ -9,9 +9,7 @@
   {{ range .Animals }}
   <a class="card" href="{{.ID}}">
     <img
-      src="{{ with.Images }}
-    {{with index . 0}}{{.FilePath}}/{{.FileName}}{{ end }}
-    {{ end }}"
+      src="{{with .Images}}{{with index . 0}}{{.}}{{end}}{{end}}"
       alt="{{.Name}} image"
     />
     <div class="info">

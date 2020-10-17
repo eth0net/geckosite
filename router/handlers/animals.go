@@ -52,6 +52,24 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		Order("name").
 		Find(&animals)
 
+	for _, animal := range animals {
+		// get image for animal
+		ch := s3.Client.ListObjects(
+			context.Background(),
+			species.Order,
+			minio.ListObjectsOptions{
+				Prefix:    species.Type + "/" + animal.ID.String(),
+				Recursive: true,
+				MaxKeys:   1,
+			},
+		)
+		// store into the animal struct
+		for object := range ch {
+			path := "/s3/" + species.Order + "/" + object.Key
+			animal.Images = append(animal.Images, path)
+		}
+	}
+
 	pageData.Animals = animals
 
 	lp, hp := "templates/layout.gohtml", "templates/animals.gohtml"
