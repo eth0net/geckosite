@@ -64,8 +64,6 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rand.Seed(time.Now().UnixNano())
-
 	pageData := pages[o][t]
 	for c, card := range pageData.Cards {
 		splitPath := strings.Split(card.Path, "/")
@@ -109,6 +107,7 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 
+		rand.Seed(time.Now().UnixNano())
 		rand.Shuffle(len(animals), func(i, j int) {
 			animals[i], animals[j] = animals[j], animals[i]
 		})

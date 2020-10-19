@@ -62,6 +62,11 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			continue
 		}
 
+		rand.Seed(time.Now().UnixNano())
+		rand.Shuffle(len(animals), func(i, j int) {
+			animals[i], animals[j] = animals[j], animals[i]
+		})
+
 		for _, animal := range animals {
 			// get images for animal
 			var images []string
@@ -80,7 +85,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 			// pick random one for card
 			if len(images) > 0 {
-				data.Cards[c].Image = images[rand.Intn(len(images))]
+				data.Cards[c].Image = images[0]
 				break
 			}
 		}
