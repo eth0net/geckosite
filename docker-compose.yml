@@ -13,12 +13,12 @@ services:
       - private
     environment:
       DB_HOST: db
-      DB_NAME: geckosite
-      DB_USER: geckosite
-      DB_PASSWORD: geckosite
+      DB_NAME: ${DB_NAME:-geckosite}
+      DB_USER: ${DB_USER:-geckosite}
+      DB_PASSWORD: ${DB_PASSWORD:-geckosite}
       MINIO_ENDPOINT: minio:9000
-      MINIO_ACCESS_KEY: geckosite
-      MINIO_SECRET_KEY: geckosite
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-geckosite}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-geckosite}
   db:
     image: postgres:alpine
     restart: unless-stopped
@@ -27,9 +27,9 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: geckosite
-      POSTGRES_USER: geckosite
-      POSTGRES_PASSWORD: geckosite
+      POSTGRES_DB: ${POSTGRES_DB:-geckosite}
+      POSTGRES_USER: ${POSTGRES_USER:-geckosite}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-geckosite}
   minio:
     image: minio/minio
     restart: unless-stopped
@@ -41,8 +41,8 @@ services:
     volumes:
       - minio_data:/data
     environment:
-      MINIO_ACCESS_KEY: geckosite
-      MINIO_SECRET_KEY: geckosite
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-geckosite}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-geckosite}
       MINIO_REGION_NAME: eu-west-1
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
