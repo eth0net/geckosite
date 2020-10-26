@@ -8,7 +8,6 @@ type Species struct {
 	LatinName   string   `json:"latinName" gorm:"unique;not null"`
 	Description string   `json:"description"`
 	Order       string   `json:"-"`
-	Path        string   `json:"-"`
+	Type        string   `json:"-"`
 	Traits      []*Trait `json:"traits"`
-	// Images      []string `json:"images"`
 }

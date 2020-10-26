@@ -1,11 +1,55 @@
+h2 {
+  /* background-color: var(--secondary); */
+  border-radius: 1rem;
+  font-size: 4rem;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
 #about {
   margin: 1rem;
   padding: 1rem;
   border-radius: 1rem;
   background-color: var(--secondary);
   color: var(--text-secondary);
+  font-size: 1.25em;
+  font-family: Londrina Light;
+}
+
+#about > *:first-child {
+  font-family: Londrina;
 }
 
 #about > *:not(:last-child) {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5em;
+}
+
+#about > .row {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#about > .row h3 {
+  font-size: 1.5em;
+}
+
+#about > .row img {
+  border-radius: 1em;
+  height: auto;
+  width: 30%;
+  min-width: 400px;
+}
+
+@media screen and (max-width: 700px) {
+  #about > .row {
+    flex-wrap: wrap;
+  }
+
+  #about > .row > img {
+    width: auto;
+    min-width: unset;
+  }
 }

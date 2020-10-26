@@ -6,10 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{template "title" .}} | Holly's Hatchlings</title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/static/icon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/static/icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/static/icon/favicon-16x16.png">
-    <link rel="manifest" href="/static/icon/site.webmanifest">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/static/icon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/static/icon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/static/icon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/static/icon/site.webmanifest" />
 
     <link rel="stylesheet" href="/static/css/main.css" />
     <script src="/static/js/main.js"></script>
@@ -20,10 +34,10 @@
     <header>
       <div class="container">
         <span class="spacer"></span>
-        {{/* <img src="/static/img/hhicon.png"> */}}
         <a id="title" href="/">
           <h1>Holly's Hatchlings</h1>
         </a>
+        {{/* ion menu */}}
         <svg
           id="menu-button"
           onclick="toggleNav()"
@@ -58,6 +72,7 @@
             d="M88 360h336"
           />
         </svg>
+        {{/* ion close */}}
         <svg
           id="close-button"
           class="nodisplay"
@@ -124,4 +139,4 @@
     </footer>
   </body>
 </html>
-{{end}}
+{{ end }}

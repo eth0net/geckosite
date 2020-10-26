@@ -1,20 +1,64 @@
-version: "2"
+version: "3"
 services:
   app:
     build: .
     restart: unless-stopped
-    ports: "80:80"
-    networks:
-      private:
+    ports:
+      - "8080:80"
     depends_on:
       - db
+      - minio
+    networks:
+      - web
+      - private
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME:-geckosite}
+      DB_USER: ${DB_USER:-geckosite}
+      DB_PASSWORD: ${DB_PASSWORD:-geckosite}
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-geckosite}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-geckosite}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
   db:
     image: postgres:alpine
     restart: unless-stopped
-    ports: "5432:5432"
     networks:
-      private:
+      - private
     volumes:
-      - "/var/lib/postgresql/data"
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-geckosite}
+      POSTGRES_USER: ${POSTGRES_USER:-geckosite}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-geckosite}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  minio:
+    image: minio/minio
+    restart: unless-stopped
+    command: server /data
+    ports:
+      - "9000:9000"
+    networks:
+      - private
+    volumes:
+      - minio_data:/data
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-geckosite}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-geckosite}
+      MINIO_REGION_NAME: eu-west-1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
 networks:
   private:
+  web:
+    external: true
+volumes:
+  db_data:
+  minio_data:

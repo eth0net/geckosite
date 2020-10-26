@@ -5,8 +5,8 @@
 {{define "main"}}
 <div id="cardbox">
   {{range .Cards}}
-    <a class="card" href="{{.Link}}">
-      <img src="{{.Image}}" alt="{{.Title}} image"/>
+    <a class="card" href="{{.Path}}">
+      <img src="{{with .Image}}{{.}}{{end}}" alt="{{.Title}} image"/>
       <h2>{{.Title}}</h2>
     </a>
   {{end}}

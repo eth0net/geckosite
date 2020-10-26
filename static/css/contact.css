@@ -1,13 +1,18 @@
+h2 {
+  /* background-color: var(--secondary); */
+  border-radius: 1rem;
+  font-size: 4rem;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+}
+
 #contact-wrap {
   display: flex;
   flex-flow: row wrap;
 }
 
-#info-social {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: flex-start;
+#welcome-info-social {
   flex: 1 1 45%;
   margin: 1rem;
   padding: 1rem;
@@ -17,8 +22,15 @@
   color: var(--text-secondary);
 }
 
-#info-social > p {
+#welcome-info-social p {
   margin-bottom: 1rem;
+}
+
+#info-social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
 }
 
 #info-social svg {
@@ -45,6 +57,10 @@
   border-radius: 1rem;
   background-color: var(--secondary);
   color: var(--text-secondary);
+}
+
+#contact p {
+  text-align: center;
 }
 
 #contact > #user {

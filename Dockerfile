@@ -1,8 +1,9 @@
-FROM golang:1.14.4-alpine AS builder
-WORKDIR /build
+FROM golang:1.15-alpine
+WORKDIR /app
+COPY go.mod .
+RUN go mod download
+RUN go mod verify
 COPY . .
-RUN go builder -o main
-
-FROM alpine:3.11.3
-COPY --from=BUILD /build/main /app/main
+RUN go build -o main
+EXPOSE 80
 CMD ["/app/main"]

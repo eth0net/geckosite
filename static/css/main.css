@@ -1,27 +1,27 @@
 @font-face {
-  font-family: Get Show;
-  src: url(/static/font/get-show.ttf);
+  font-family: Londrina;
+  src: url(/static/font/LondrinaSolid-Regular.ttf);
 }
 
 @font-face {
-  font-family: Sofia;
-  src: url(/static/font/Sofia-Regular.ttf);
+  font-family: Londrina Light;
+  src: url(/static/font/LondrinaSolid-Light.ttf);
 }
 
 @font-face {
-  font-family: Roboto Mono;
-  src: url(/static/font/RobotoMono-VariableFont_wght.ttf);
+  font-family: Londrina Thin;
+  src: url(/static/font/LondrinaSolid-Thin.ttf);
 }
 
 :root {
-  --primary: #5fb5a8;
+  --primary: #ff9e00;
   --text-primary: #ffffff;
-  --secondary: #7ed8cd;
+  --secondary: #ffb844;
   --text-secondary: #ffffff;
 
-  --bg1: #fdd3dd;
-  --bg2: #f3bdca;
-  --bg3: #f49da3;
+  --bg1: #ffecbe;
+  --bg2: #fede8b;
+  --bg3: #ffecbe;
 }
 
 * {
@@ -45,13 +45,13 @@ body {
   background: rgb(244, 157, 163);
   background: linear-gradient(var(--bg1), var(--bg2), var(--bg3));
   color: white;
+  font-family: Londrina;
   min-height: 100vh;
 }
 
 header {
   color: var(--text-primary);
   background-color: var(--primary);
-  font-family: Sofia;
   width: 100%;
 }
 
@@ -59,7 +59,6 @@ header > .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 1em; */
 }
 
 header > .container > * {
@@ -82,7 +81,7 @@ header > .container > svg {
   margin: 1rem;
 }
 
-header a:hover,
+a:hover,
 header svg:hover {
   opacity: 0.5;
   cursor: pointer;
@@ -100,6 +99,7 @@ header svg:hover {
   overflow: hidden;
   height: calc(100vh - 64px);
   width: 100vw;
+  z-index: 99;
 }
 
 #navbar > .dropdown {
@@ -131,8 +131,6 @@ main > .container > img {
 footer {
   color: var(--text-primary);
   background-color: var(--primary);
-  font-family: Roboto Mono;
-  font-size: 0.75rem;
   width: 100%;
 }
 
@@ -170,4 +168,16 @@ footer > .container {
 
 .nooverflow {
   overflow: hidden;
+}
+
+@media screen and (max-width: 400px) {
+  header > .container > #title > h1 {
+    font-size: 1.75em;
+  }
+}
+
+@media screen and (max-width: 355px) {
+  header > .container > #title > h1 {
+    font-size: 1.5em;
+  }
 }

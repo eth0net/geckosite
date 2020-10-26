@@ -3,6 +3,7 @@
   flex-flow: row wrap;
   justify-content: space-evenly;
   margin: 1rem;
+  gap: 1rem;
 }
 
 #cardbox > .card {
@@ -12,11 +13,13 @@
   background-color: var(--secondary);
   color: var(--text-secondary);
   border-radius: 1rem;
-  padding: 1rem;
-  margin: 1rem;
   max-width: 300px;
 }
 
 #cardbox > .card > img {
-  margin-bottom: 1rem;
+  border-radius: 1rem 1rem 0 0;
+}
+
+#cardbox > .card > h2 {
+  margin: 1rem;
 }
