@@ -89,16 +89,8 @@ header svg:hover {
 
 #navbar {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   align-items: center;
   background-color: var(--primary);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  overflow: hidden;
-  height: calc(100vh - 64px);
-  width: 100vw;
   z-index: 99;
 }
 
@@ -170,14 +162,50 @@ footer > .container {
   overflow: hidden;
 }
 
-@media screen and (max-width: 400px) {
+/* Title font size steps */
+@media screen and (max-width: 350px) {
   header > .container > #title > h1 {
     font-size: 1.75em;
   }
 }
 
-@media screen and (max-width: 355px) {
+@media screen and (max-width: 320px) {
   header > .container > #title > h1 {
     font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 290px) {
+  header > .container > #title > h1 {
+    font-size: 1.25em;
+  }
+}
+
+/* Full size navbar */
+@media screen and (min-width: 800px) {
+  #menu-button {
+    display: none;
+  }
+
+  #navbar {
+    gap: 1rem;
+    flex-grow: 1;
+    justify-content: flex-end;
+    margin: 0 1rem;
+  }
+}
+
+/* Mobile navbar */
+@media screen and (max-width: 799px) {
+  #navbar {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    height: calc(100vh - 64px);
+    width: 100vw;
   }
 }
