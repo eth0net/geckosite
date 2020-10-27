@@ -19,6 +19,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	type card struct{ Title, Path, Image string }
 	type page struct {
 		Cards []card
+		Count int64
 	}
 
 	data := page{
@@ -90,6 +91,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
+
+	database.DB.Table("animals").Count(&data.Count)
 
 	lp, hp := "templates/layout.gohtml", "templates/home.gohtml"
 	tmpl := template.Must(template.ParseFiles(lp, hp))

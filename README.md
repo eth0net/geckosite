@@ -1,2 +1,3 @@
-# geckosite
-Code for gecko site
+# Holly's Hatchlings
+
+Code for website and API server
