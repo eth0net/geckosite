@@ -21,9 +21,12 @@ h2 {
 
 #about > .row {
   display: flex;
-  gap: 1em;
   justify-content: center;
   align-items: flex-start;
+}
+
+#about > .row > *:not(:last-child) {
+  margin: 0 1rem 0 0;
 }
 
 #about > .row > div {
@@ -46,6 +49,10 @@ h2 {
     flex-wrap: wrap;
   }
 
+  #about > .row > *:not(:last-child) {
+    margin: 0 0 1rem 0;
+  }
+
   #about > .row > img {
     width: auto;
     min-width: unset;
@@ -53,8 +60,8 @@ h2 {
 }
 
 @media screen and (min-width: 800px) {
-  #about > .row > div {
-    gap: 1rem;
+  #about > .row > div > *:not(:last-child) {
+    margin-bottom: 1rem;
   }
 }
 
