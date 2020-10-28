@@ -22,7 +22,7 @@ h2 {
 }
 
 #about > *:not(:last-child) {
-  margin-bottom: 1.5em;
+  margin-bottom: 2.5em;
 }
 
 #about > .row {
@@ -32,15 +32,19 @@ h2 {
   align-items: flex-start;
 }
 
-#about > .row h3 {
+#about > .row > div {
+  display: flex;
+  flex-direction: column;
+}
+
+#about > .row > div > h3 {
   font-size: 1.5em;
 }
 
 #about > .row img {
   border-radius: 1em;
   height: auto;
-  width: 30%;
-  min-width: 400px;
+  width: 250px;
 }
 
 @media screen and (max-width: 700px) {
@@ -51,5 +55,17 @@ h2 {
   #about > .row > img {
     width: auto;
     min-width: unset;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  #about > .row > div {
+    gap: 1rem;
+  }
+}
+
+@media screen and (min-width: 830px) {
+  #about > .row > img {
+    width: 200px;
   }
 }
