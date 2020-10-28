@@ -45,11 +45,20 @@ h2 {
 }
 
 @media screen and (max-width: 700px) {
-  #about > .row {
+  #about > .row:first-of-type {
     flex-wrap: wrap;
   }
 
-  #about > .row > *:not(:last-child) {
+  #about > .row:nth-of-type(2) {
+    flex-wrap: wrap-reverse;
+  }
+
+  #about > .row > * {
+    margin: 0;
+  }
+
+  #about > .row:first-of-type > *:not(:last-child),
+  #about > .row:nth-of-type(2) > *:not(:first-child) {
     margin: 0 0 1rem 0;
   }
 
