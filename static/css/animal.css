@@ -1,12 +1,10 @@
 #animal {
   display: flex;
   flex-flow: row wrap;
+  gap: 1rem;
+  margin: 2rem 1rem;
   align-items: flex-start;
   justify-content: center;
-}
-
-#animal > * {
-  margin: 1rem;
 }
 
 #animal > #gallery {
