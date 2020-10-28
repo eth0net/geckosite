@@ -1,3 +1,11 @@
+const setVh = () => {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+};
+
+window.addEventListener("load", setVh);
+window.addEventListener("resize", setVh);
+
 function toggleNav() {
   var style = getComputedStyle(document.getElementById("navbar"));
   if (style.display == "none") {

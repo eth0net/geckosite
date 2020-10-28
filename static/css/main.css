@@ -14,6 +14,7 @@
 }
 
 :root {
+  --navbar: #392033;
   --primary: #39203380;
   --secondary: #39203350;
   --text: #fff4e2;
@@ -95,7 +96,7 @@ header svg:hover {
 #navbar {
   display: flex;
   align-items: center;
-  background-color: var(--primary);
+  background-color: var(--navbar);
   z-index: 99;
 }
 
@@ -211,6 +212,7 @@ footer > .container {
     left: 0;
     overflow: hidden;
     height: calc(100vh - 64px);
+    height: calc(var(--vh, 1vh) * 100 - 64px);
     width: 100vw;
   }
 }
