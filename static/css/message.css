@@ -1,7 +1,4 @@
-div#message {
-  margin: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: var(--secondary);
-  color: var(--text-secondary);
+#message {
+  margin: 2rem;
+  text-align: center;
 }

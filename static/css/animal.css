@@ -1,12 +1,9 @@
 #animal {
   display: flex;
   flex-flow: row wrap;
+  margin: 2rem 1rem;
   align-items: flex-start;
   justify-content: center;
-}
-
-#animal > * {
-  margin: 1rem;
 }
 
 #animal > #gallery {
@@ -32,6 +29,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
+  padding: 0.5rem;
 }
 
 #animal > #details > * {
@@ -46,25 +44,30 @@
 #animal > #details > #list {
   display: grid;
   align-items: baseline;
+  gap: 0.5rem 1rem;
 }
 
 #animal > #details > #list > * {
-  margin: 0.25rem;
+  white-space: nowrap;
 }
 
 @media screen and (min-width: 300px) {
   #animal > #details > #list {
-    grid-template-columns: repeat(2, max-content);
+    grid-template-columns: repeat(2, auto);
   }
 }
 
 @media screen and (min-width: 480px) {
   #animal > #details > #list {
-    grid-template-columns: repeat(4, max-content);
+    grid-template-columns: repeat(4, auto);
   }
 }
 
 @media screen and (max-width: 600px) {
+  #animal > *:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
   #animal > #details {
     width: calc(450px + 2rem);
   }
@@ -75,7 +78,11 @@
     flex-wrap: nowrap;
   }
 
+  #animal > *:not(:last-child) {
+    margin-right: 1rem;
+  }
+
   #animal > #details > #list {
-    grid-template-columns: repeat(2, max-content);
+    grid-template-columns: repeat(2, auto);
   }
 }

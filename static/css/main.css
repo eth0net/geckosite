@@ -14,14 +14,15 @@
 }
 
 :root {
-  --primary: #ff9e00;
-  --text-primary: #ffffff;
-  --secondary: #ffb844;
-  --text-secondary: #ffffff;
-
-  --bg1: #ffecbe;
-  --bg2: #fede8b;
-  --bg3: #ffecbe;
+  --navbar: #392033;
+  --primary: #39203380;
+  --secondary: #39203350;
+  --text: #fff4e2;
+  --bg: #ff8967;
+  --bg1: #392033;
+  --bg2: #fd6051;
+  --bg3: #ff8967;
+  --bg4: #fec051;
 }
 
 * {
@@ -35,6 +36,10 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 1.75rem;
+}
+
 img {
   display: block;
 }
@@ -42,9 +47,14 @@ img {
 body {
   display: flex;
   flex-direction: column;
-  background: rgb(244, 157, 163);
-  background: linear-gradient(var(--bg1), var(--bg2), var(--bg3));
-  color: white;
+  background: var(--bg);
+  background: linear-gradient(
+    var(--bg1) 64px,
+    var(--bg2),
+    var(--bg3),
+    var(--bg4) calc(100% - 15px)
+  );
+  color: var(--text);
   font-family: Londrina;
   min-height: 100vh;
 }
@@ -90,7 +100,7 @@ header svg:hover {
 #navbar {
   display: flex;
   align-items: center;
-  background-color: var(--primary);
+  background-color: var(--navbar);
   z-index: 99;
 }
 
@@ -163,23 +173,23 @@ footer > .container {
 }
 
 /* Title font size steps */
-@media screen and (max-width: 350px) {
+/* @media screen and (max-width: 350px) {
   header > .container > #title > h1 {
     font-size: 1.75em;
   }
-}
+} */
 
-@media screen and (max-width: 320px) {
+/* @media screen and (max-width: 320px) {
   header > .container > #title > h1 {
     font-size: 1.5em;
   }
-}
+} */
 
-@media screen and (max-width: 290px) {
+/* @media screen and (max-width: 290px) {
   header > .container > #title > h1 {
     font-size: 1.25em;
   }
-}
+} */
 
 /* Full size navbar */
 @media screen and (min-width: 800px) {
@@ -188,10 +198,13 @@ footer > .container {
   }
 
   #navbar {
-    gap: 1rem;
     flex-grow: 1;
     justify-content: flex-end;
     margin: 0 1rem;
+  }
+
+  #navbar > *:not(:last-child) {
+    margin-right: 1rem;
   }
 }
 
@@ -206,6 +219,7 @@ footer > .container {
     left: 0;
     overflow: hidden;
     height: calc(100vh - 64px);
+    height: calc(var(--vh, 1vh) * 100 - 64px);
     width: 100vw;
   }
 }

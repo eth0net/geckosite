@@ -2,9 +2,9 @@ name: Go
 
 on:
   push:
-    branches: [master, dev]
+    branches: [main, dev]
   pull_request:
-    branches: [master, dev]
+    branches: [main, dev]
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
         run: |
           go get -v -t -d ./...
           if [ -f Gopkg.toml ]; then
-              curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+              curl https://raw.githubusercontent.com/golang/dep/main/install.sh | sh
               dep ensure
           fi
 
