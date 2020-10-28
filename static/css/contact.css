@@ -1,9 +1,6 @@
 h2 {
-  /* background-color: var(--secondary); */
-  border-radius: 1rem;
   font-size: 4rem;
-  margin: 1rem;
-  padding: 1rem;
+  margin: 2rem;
   text-align: center;
 }
 
@@ -16,7 +13,6 @@ h2 {
   flex: 1 1 45%;
   margin: 1rem;
   padding: 1rem;
-  /* border: 1px solid #563228; */
   border-radius: 1rem;
   background-color: var(--secondary);
   color: var(--text-secondary);

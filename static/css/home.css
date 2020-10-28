@@ -1,8 +1,6 @@
 #home {
   margin: 1rem;
   padding: 1rem;
-  border-radius: 1rem;
-  background-color: var(--secondary);
   color: var(--text-secondary);
   text-align: center;
 }
