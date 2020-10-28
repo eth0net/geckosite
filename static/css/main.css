@@ -36,6 +36,10 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 1.75rem;
+}
+
 img {
   display: block;
 }
@@ -169,23 +173,23 @@ footer > .container {
 }
 
 /* Title font size steps */
-@media screen and (max-width: 350px) {
+/* @media screen and (max-width: 350px) {
   header > .container > #title > h1 {
     font-size: 1.75em;
   }
-}
+} */
 
-@media screen and (max-width: 320px) {
+/* @media screen and (max-width: 320px) {
   header > .container > #title > h1 {
     font-size: 1.5em;
   }
-}
+} */
 
-@media screen and (max-width: 290px) {
+/* @media screen and (max-width: 290px) {
   header > .container > #title > h1 {
     font-size: 1.25em;
   }
-}
+} */
 
 /* Full size navbar */
 @media screen and (min-width: 800px) {
