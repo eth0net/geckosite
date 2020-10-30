@@ -40,8 +40,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build the Docker image
-        run: docker build . --tag $IMAGE_NAME:$(date +%s)
+      - name: Build image
+        run: docker build . -f Dockerfile.production --tag $IMAGE_NAME
 
       - name: Log into GitHub Container Registry
         run: echo "${{ secrets.CR_TOKEN }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
