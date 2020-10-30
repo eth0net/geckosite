@@ -18,11 +18,14 @@ import (
 func Home(w http.ResponseWriter, r *http.Request) {
 	type card struct{ Title, Path, Image string }
 	type page struct {
-		Cards []card
-		Count int64
+		Title, Path string
+		Cards       []card
+		Count       int64
 	}
 
 	data := page{
+		Title: "Home",
+		Path:  r.URL.Path,
 		Cards: []card{
 			{"Crested Geckos", "/geckos/crested", ""},
 			{"Gargoyle Geckos", "/geckos/gargoyle", ""},

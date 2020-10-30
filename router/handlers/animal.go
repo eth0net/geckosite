@@ -16,31 +16,48 @@ import (
 
 // Animal returns a page for a single animal.
 func Animal(w http.ResponseWriter, r *http.Request) {
-	var data model.Animal
+	pageData := struct {
+		Title, Path string
+		Animal      *model.Animal
+	}{
+		Path: r.URL.Path,
+	}
+
+	var animal model.Animal
 	database.DB.Model(&model.Animal{}).
 		Preload(clause.Associations).
 		Where("id = ?", mux.Vars(r)["id"]).
-		First(&data)
+		First(&animal)
 
-	if reflect.ValueOf(data).IsZero() {
+	if reflect.ValueOf(animal).IsZero() {
 		NotFound(w, r)
 		return
 	}
 
+	pageData.Animal = &animal
+
+	if len(animal.Name) > 0 {
+		pageData.Title = animal.Name
+	} else if len(animal.Reference) > 0 {
+		pageData.Title = animal.Reference
+	} else {
+		pageData.Title = animal.Species.Name
+	}
+
 	ch := s3.Client.ListObjects(
 		context.Background(),
-		data.Species.Order,
+		animal.Species.Order,
 		minio.ListObjectsOptions{
-			Prefix:    data.Species.Type + "/" + data.ID.String(),
+			Prefix:    animal.Species.Type + "/" + animal.ID.String(),
 			Recursive: true,
 		},
 	)
 	for object := range ch {
-		path := "/s3/" + data.Species.Order + "/" + object.Key
-		data.Images = append(data.Images, path)
+		path := "/s3/" + animal.Species.Order + "/" + object.Key
+		animal.Images = append(animal.Images, path)
 	}
 
 	lp, hp := "templates/layout.gohtml", "templates/animal.gohtml"
 	tmpl := template.Must(template.ParseFiles(lp, hp))
-	tmpl.ExecuteTemplate(w, "layout", data)
+	tmpl.ExecuteTemplate(w, "layout", pageData)
 }

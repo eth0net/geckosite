@@ -12,9 +12,12 @@ import (
 // Contact returns the contact us page.
 func Contact(w http.ResponseWriter, r *http.Request) {
 	data := struct {
-		Success bool
-		Message string
-	}{}
+		Success              bool
+		Title, Path, Message string
+	}{
+		Title: "Contact Us",
+		Path:  r.URL.Path,
+	}
 
 	if r.Method == http.MethodPost {
 		basePlain := "Name: %v\r\nEmail: %v\r\nSubject: %v\r\nMessage: %v\r\n"

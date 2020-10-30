@@ -1,4 +1,10 @@
 {{define "title"}}{{.Title}}{{ end }}
+{{define "meta"}}
+<meta property="og:title" content="{{.Title}} - {{.Species.Name}}"/>
+{{with .Image}}
+<meta property="og:image" content="{{.}}"/>
+{{end}}
+{{end}}
 {{define "head"}}
 <link rel="stylesheet" href="/static/css/animals.css" />
 <link rel="stylesheet" href="/static/css/message.css"/>
