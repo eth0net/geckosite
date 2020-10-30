@@ -1,4 +1,10 @@
-{{define "title"}}About Us{{end}}
+{{define "title"}}{{.Title}}{{end}}
+{{define "meta"}}
+<meta property="og:title" content="{{.Title}}"/>
+<meta property="og:image" content="/static/img/hhicon.png"/>
+<meta property="og:description" content="Information about us and our group"/>
+<meta property="og:determiner" content="the"/>
+{{end}}
 {{define "head"}}
 <link rel="stylesheet" href="/static/css/about.css"/>
 {{end}}

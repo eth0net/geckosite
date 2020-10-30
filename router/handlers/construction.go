@@ -5,10 +5,11 @@ import (
 	"net/http"
 )
 
-// Construction returns the under contruction page.
+// Construction returns the under construction page.
 func Construction(w http.ResponseWriter, r *http.Request) {
-	data := struct{ Title, Message string }{
+	data := struct{ Title, Path, Message string }{
 		"Under Construction",
+		r.URL.Path,
 		"Page is currently under construction",
 	}
 

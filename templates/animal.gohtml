@@ -1,74 +1,81 @@
-{{define "title"}}{{.Name}}{{end}}
+{{define "title"}}{{.Title}}{{end}}
+{{define "meta"}}
+{{/* Name > ref > species? */}}
+<meta property="og:title" content="{{.Title}}"/>
+{{with index .Animal.Images 0}}
+<meta property="og:image" content="{{.}}"/>
+{{end}}
+{{end}}
 {{define "head"}}
 <link rel="stylesheet" href="/static/css/animal.css"/>
 {{end}}
 {{define "main"}}
 <div id="animal">
   <div id="gallery">
-    {{range .Images}}
+    {{range .Animal.Images}}
     <img src="{{.}}"/>
     {{end}}
   </div>
   <div id="details">
-    <h2 id="title">{{with .Name}}{{.}}{{else}}...{{end}}</h2>
-    <h2 id="title">{{.Species.Name}}</h2>
-    <p id="species">{{.Species.LatinName}}</p>
-    <p id="description">{{.Description}}</p>
+    <h2 id="title">{{with .Animal.Name}}{{.}}{{else}}...{{end}}</h2>
+    <h2 id="title">{{.Animal.Species.Name}}</h2>
+    <p id="species">{{.Animal.Species.LatinName}}</p>
+    <p id="description">{{.Animal.Description}}</p>
     <div id="list">
       <h3>Reference:</h3>
-      <span>{{.Reference}}</span>
+      <span>{{.Animal.Reference}}</span>
       <h3>Species:</h3>
-      <span>{{.Species.Name}}</span>
+      <span>{{.Animal.Species.Name}}</span>
       <h3>Sex:</h3>
-      <span>{{.Sex}}</span>
+      <span>{{.Animal.Sex}}</span>
       <h3>Status:</h3>
-      <span>{{.Status}}</span>
+      <span>{{.Animal.Status}}</span>
       <h3>Updated:</h3>
-      <span>{{.UpdatedAt.Format "02/01/2006"}}</span>
+      <span>{{.Animal.UpdatedAt.Format "02/01/2006"}}</span>
       <h3>Lay Date:</h3>
       <span>
-        {{if .DateLaid}}
-          {{.DateLaid.Format "02/01/2006"}}
+        {{if .Animal.DateLaid}}
+          {{.Animal.DateLaid.Format "02/01/2006"}}
         {{else}}
           N/A
         {{end}}
       </span>
       <h3>Hatch Date:</h3>
       <span>
-        {{if .DateHatched}}
-          {{.DateHatched.Format "02/01/2006"}}
+        {{if .Animal.DateHatched}}
+          {{.Animal.DateHatched.Format "02/01/2006"}}
         {{else}}
           N/A
         {{end}}
       </span>
       <h3>Purchase Date:</h3>
       <span>
-        {{if .DateBought}}
-          {{.DateBought.Format "02/01/2006"}}
+        {{if .Animal.DateBought}}
+          {{.Animal.DateBought.Format "02/01/2006"}}
         {{else}}
           N/A
         {{end}}
       </span>
       <h3>Sale Date:</h3>
       <span>
-        {{if .DateSold}}
-          {{.DateSold.Format "02/01/2006"}}
+        {{if .Animal.DateSold}}
+          {{.Animal.DateSold.Format "02/01/2006"}}
         {{else}}
           N/A
         {{end}}
       </span>
       <h3>Father:</h3>
       <span>
-        {{if .Father}}
-          <a href="{{.Father.ID}}">{{.Father.Name}}</a>
+        {{if .Animal.Father}}
+          <a href="{{.Animal.Father.ID}}">{{.Animal.Father.Name}}</a>
         {{else}}
           N/A
         {{end}}
       </span>
       <h3>Mother:</h3>
       <span>
-        {{if .Mother}}
-          <a href="{{.Mother.ID}}">{{.Mother.Name}}</a>
+        {{if .Animal.Mother}}
+          <a href="{{.Animal.Mother.ID}}">{{.Animal.Mother.Name}}</a>
         {{else}}
           N/A
         {{end}}

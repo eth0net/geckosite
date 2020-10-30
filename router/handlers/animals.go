@@ -17,8 +17,9 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	pageDataMap := map[string]struct {
-		Title, Where string
-		Animals      []*model.Animal
+		Title, Where, Path, Image string
+		Species                   *model.Species
+		Animals                   []*model.Animal
 	}{
 		"for-sale": {
 			Title: "For Sale",
@@ -40,11 +41,13 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 	}
 
 	pageData := pageDataMap[vars["id"]]
+	pageData.Path = r.URL.Path
 
 	var species model.Species
 	database.DB.
 		Where(&model.Species{Order: vars["order"], Type: vars["type"]}).
 		First(&species)
+	pageData.Species = &species
 
 	var animals []*model.Animal
 	database.DB.
@@ -67,6 +70,10 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		for object := range ch {
 			path := "/s3/" + species.Order + "/" + object.Key
 			animal.Images = append(animal.Images, path)
+		}
+
+		if pageData.Image == "" && len(animal.Images) > 0 {
+			pageData.Image = animal.Images[0]
 		}
 	}
 

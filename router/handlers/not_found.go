@@ -9,8 +9,9 @@ import (
 func NotFound(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(404)
 
-	data := struct{ Title, Message string }{
+	data := struct{ Title, Path, Message string }{
 		"Not found",
+		r.URL.Path,
 		"Error 404: Page not found",
 	}
 

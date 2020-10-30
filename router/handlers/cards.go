@@ -19,33 +19,41 @@ import (
 func Cards(w http.ResponseWriter, r *http.Request) {
 	type card struct{ Title, Path, Image string }
 	type page struct {
-		Title string
-		Cards []card
+		Title, Path, Image string
+		Cards              []card
 	}
 	type pageMap map[string]page
 
 	pages := map[string]pageMap{
 		"geckos": {
-			"": {"Geckos", []card{
-				{"Crested Geckos", "/geckos/crested", ""},
-				{"Gargoyle Geckos", "/geckos/gargoyle", ""},
-				{"Leopard Geckos", "/geckos/leopard", ""},
-			}},
-			"crested": {"Crested Geckos", []card{
-				{"Personal", "/geckos/crested/personal", ""},
-				{"Holdbacks", "/geckos/crested/holdbacks", ""},
-				{"For Sale", "/geckos/crested/for-sale", ""},
-			}},
-			"gargoyle": {"Gargoyle Geckos", []card{
-				{"Personal", "/geckos/gargoyle/personal", ""},
-				{"Holdbacks", "/geckos/gargoyle/holdbacks", ""},
-				{"For Sale", "/geckos/gargoyle/for-sale", ""},
-			}},
-			"leopard": {"Leopard Geckos", []card{
-				{"Personal", "/geckos/leopard/personal", ""},
-				{"Holdbacks", "/geckos/leopard/holdbacks", ""},
-				{"For Sale", "/geckos/leopard/for-sale", ""},
-			}},
+			"": {
+				Title: "Geckos",
+				Cards: []card{
+					{"Crested Geckos", "/geckos/crested", ""},
+					{"Gargoyle Geckos", "/geckos/gargoyle", ""},
+					{"Leopard Geckos", "/geckos/leopard", ""},
+				}},
+			"crested": {
+				Title: "Crested Geckos",
+				Cards: []card{
+					{"Personal", "/geckos/crested/personal", ""},
+					{"Holdbacks", "/geckos/crested/holdbacks", ""},
+					{"For Sale", "/geckos/crested/for-sale", ""},
+				}},
+			"gargoyle": {
+				Title: "Gargoyle Geckos",
+				Cards: []card{
+					{"Personal", "/geckos/gargoyle/personal", ""},
+					{"Holdbacks", "/geckos/gargoyle/holdbacks", ""},
+					{"For Sale", "/geckos/gargoyle/for-sale", ""},
+				}},
+			"leopard": {
+				Title: "Leopard Geckos",
+				Cards: []card{
+					{"Personal", "/geckos/leopard/personal", ""},
+					{"Holdbacks", "/geckos/leopard/holdbacks", ""},
+					{"For Sale", "/geckos/leopard/for-sale", ""},
+				}},
 		},
 	}
 
@@ -65,6 +73,7 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 	}
 
 	pageData := pages[o][t]
+	pageData.Path = r.URL.Path
 	for c, card := range pageData.Cards {
 		splitPath := strings.Split(card.Path, "/")
 
@@ -131,6 +140,7 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 			// pick random one for card
 			if len(images) > 0 {
 				pageData.Cards[c].Image = images[0]
+				pageData.Image = images[0]
 				break
 			}
 		}
@@ -138,5 +148,5 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 
 	lp, hp := "templates/layout.gohtml", "templates/cards.gohtml"
 	tmpl := template.Must(template.ParseFiles(lp, hp))
-	tmpl.ExecuteTemplate(w, "layout", pages[o][t])
+	tmpl.ExecuteTemplate(w, "layout", pageData)
 }
