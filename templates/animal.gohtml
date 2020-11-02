@@ -2,9 +2,9 @@
 {{define "meta"}}
 {{/* Name > ref > species? */}}
 <meta property="og:title" content="{{.Title}}"/>
-{{with index .Animal.Images 0}}
+{{with .Animal.Images}}{{with index . 0}}
 <meta property="og:image" content="{{.}}"/>
-{{end}}
+{{end}}{{end}}
 {{end}}
 {{define "head"}}
 <link rel="stylesheet" href="/static/css/animal.css"/>
