@@ -18,8 +18,8 @@
   </div>
   <div id="details">
     <h2 id="title">{{with .Animal.Name}}{{.}}{{else}}...{{end}}</h2>
-    <h2 id="title">{{.Animal.Species.Name}}</h2>
-    <p id="species">{{.Animal.Species.LatinName}}</p>
+    <h2 id="species-common">{{.Animal.Species.Name}}</h2>
+    <p id="species-latin">{{.Animal.Species.LatinName}}</p>
     <p id="description">{{.Animal.Description}}</p>
     <div id="list">
       <h3>Reference:</h3>
