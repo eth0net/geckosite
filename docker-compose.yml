@@ -8,6 +8,9 @@ services:
     depends_on:
       - db
       - minio
+    volumes:
+      - ./static:/app/static
+      - ./templates:/app/templates
     networks:
       - web
       - private
