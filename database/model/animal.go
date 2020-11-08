@@ -19,7 +19,7 @@ type Animal struct {
 	Species     *Species   `json:"species"`
 	SpeciesID   *uuid.UUID `json:"-" gorm:"not null"`
 	Sex         string     `json:"sex" gorm:"default:Unknown;not null;check:sex IN ('Male','Female','Unknown')"`
-	Status      string     `json:"status" gorm:"not null;check:status IN ('Non-Breeder','Breeder','Future Breeder','Holdback','For Sale')"`
+	Status      string     `json:"status" gorm:"not null;check:status IN ('Non-Breeder','Breeder','Future Breeder','Holdback','For Sale','Sold')"`
 
 	// Important dates for our records.
 	DateLaid    *time.Time `json:"dateLaid"`
