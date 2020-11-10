@@ -17,7 +17,9 @@
     {{end}}
   </div>
   <div id="details">
+    {{if eq .Animal.Status "Non-Breeder" "Breeder" "Future Breeder" "Holdback"}}
     <h2 id="title">{{with .Animal.Name}}{{.}}{{else}}...{{end}}</h2>
+    {{end}}
     <h2 id="species-common">{{.Animal.Species.Name}}</h2>
     <p id="species-latin">{{.Animal.Species.LatinName}}</p>
     <p id="description">{{.Animal.Description}}</p>
