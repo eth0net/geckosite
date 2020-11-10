@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 	"reflect"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/minio/minio-go/v7"
@@ -58,6 +59,11 @@ func Animal(w http.ResponseWriter, r *http.Request) {
 	}
 
 	lp, hp := "templates/layout.gohtml", "templates/animal.gohtml"
-	tmpl := template.Must(template.ParseFiles(lp, hp))
+	tmpl := template.New("Animal").Funcs(template.FuncMap{
+		"formatDate": func(t *time.Time) string {
+			return t.Format("02/01/2006")
+		},
+	})
+	tmpl = template.Must(tmpl.ParseFiles(lp, hp))
 	tmpl.ExecuteTemplate(w, "layout", pageData)
 }

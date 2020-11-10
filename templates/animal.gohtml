@@ -17,9 +17,11 @@
     {{end}}
   </div>
   <div id="details">
+    {{if eq .Animal.Status "Non-Breeder" "Breeder" "Future Breeder" "Holdback"}}
     <h2 id="title">{{with .Animal.Name}}{{.}}{{else}}...{{end}}</h2>
-    <h2 id="title">{{.Animal.Species.Name}}</h2>
-    <p id="species">{{.Animal.Species.LatinName}}</p>
+    {{end}}
+    <h2 id="species-common">{{.Animal.Species.Name}}</h2>
+    <p id="species-latin">{{.Animal.Species.LatinName}}</p>
     <p id="description">{{.Animal.Description}}</p>
     <div id="list">
       <h3>Reference:</h3>
@@ -31,11 +33,11 @@
       <h3>Status:</h3>
       <span>{{.Animal.Status}}</span>
       <h3>Updated:</h3>
-      <span>{{.Animal.UpdatedAt.Format "02/01/2006"}}</span>
+      <span>{{formatDate .Animal.UpdatedAt}}</span>
       <h3>Lay Date:</h3>
       <span>
         {{if .Animal.DateLaid}}
-          {{.Animal.DateLaid.Format "02/01/2006"}}
+          {{formatDate .Animal.DateLaid}}
         {{else}}
           N/A
         {{end}}
@@ -43,7 +45,7 @@
       <h3>Hatch Date:</h3>
       <span>
         {{if .Animal.DateHatched}}
-          {{.Animal.DateHatched.Format "02/01/2006"}}
+          {{formatDate .Animal.DateHatched}}
         {{else}}
           N/A
         {{end}}
@@ -51,7 +53,7 @@
       <h3>Purchase Date:</h3>
       <span>
         {{if .Animal.DateBought}}
-          {{.Animal.DateBought.Format "02/01/2006"}}
+          {{formatDate .Animal.DateBought}}
         {{else}}
           N/A
         {{end}}
@@ -59,7 +61,7 @@
       <h3>Sale Date:</h3>
       <span>
         {{if .Animal.DateSold}}
-          {{.Animal.DateSold.Format "02/01/2006"}}
+          {{formatDate .Animal.DateSold}}
         {{else}}
           N/A
         {{end}}

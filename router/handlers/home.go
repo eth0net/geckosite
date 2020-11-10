@@ -38,10 +38,14 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	for c, card := range data.Cards {
 		splitPath := strings.Split(card.Path, "/")
 
-		var species model.Species
+		var species *model.Species
 		database.DB.
 			Where(&model.Species{Order: splitPath[1], Type: splitPath[2]}).
 			First(&species)
+
+		if species == nil {
+			continue
+		}
 
 		var animals []*model.Animal
 		// check for sale

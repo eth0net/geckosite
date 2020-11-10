@@ -11,16 +11,16 @@ type UUID struct {
 }
 
 // BeforeCreate will set a UUID rather than numeric ID.
-func (u *UUID) BeforeCreate(tx *gorm.DB) error {
+func (u *UUID) BeforeCreate(tx *gorm.DB) (err error) {
 	if u.ID != nil {
-		return nil
+		return
 	}
 
 	id, err := uuid.NewUUID()
 	if err != nil {
-		return err
+		return
 	}
 	u.ID = &id
 
-	return nil
+	return
 }
