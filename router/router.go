@@ -29,6 +29,7 @@ func Init() *mux.Router {
 
 		Router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 		Router.Path("/favicon.ico").Handler(fs)
+		Router.Path("/sitemap.xml").Handler(fs)
 
 		Router.Path("/").HandlerFunc(handlers.Home)
 		Router.Path("/about").HandlerFunc(handlers.About)
