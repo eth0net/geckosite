@@ -37,7 +37,15 @@ func Animal(w http.ResponseWriter, r *http.Request) {
 
 	pageData.Animal = &animal
 
-	if len(animal.Name) > 0 {
+	var isPersonal bool
+	for _, status := range []string{"Future Breeder", "Breeder", "Non Breeder"} {
+		if status == animal.Status {
+			isPersonal = true
+			break
+		}
+	}
+
+	if len(animal.Name) > 0 && isPersonal {
 		pageData.Title = animal.Name
 	} else if len(animal.Reference) > 0 {
 		pageData.Title = animal.Reference
