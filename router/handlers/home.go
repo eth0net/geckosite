@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"fmt"
 	"html/template"
 	"math/rand"
 	"net/http"
@@ -38,10 +39,10 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	for c, card := range data.Cards {
 		splitPath := strings.Split(card.Path, "/")
 
-		var species *model.Species
+		var species = &model.Species{}
 		database.DB.
 			Where(&model.Species{Order: splitPath[1], Type: splitPath[2]}).
-			First(&species)
+			First(species)
 
 		if species == nil {
 			continue
@@ -90,6 +91,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 				path := "/s3/" + splitPath[1] + "/" + object.Key
 				images = append(images, path)
 			}
+
+			fmt.Println(images)
 
 			// pick random one for card
 			if len(images) > 0 {
