@@ -5,6 +5,12 @@
 {{end}}
 {{define "head"}}
 <link rel="stylesheet" href="/static/css/contact.css"/>
+<script>
+var form = document.forms.contact
+form.onsubmit = function(ev) {
+  if (!form.website.value) ev.preventDefault();
+}
+</script>
 {{end}}
 {{define "main"}}
 <h2 id="title">CONTACT US</h2>
@@ -38,6 +44,7 @@
     </div>
   </div>
   <form id="contact" method="POST">
+    <input type="text" id="website" name="website">
     <div id="user">
       <input type="text" id="name" name="name" placeholder="Name" required>
       <input type="text" id="email" name="email" placeholder="Email" required>
