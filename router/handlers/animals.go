@@ -1,15 +1,12 @@
 package handlers
 
 import (
-	"context"
 	"html/template"
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/minio/minio-go/v7"
 	"github.com/raziel2244/geckosite/database"
 	"github.com/raziel2244/geckosite/database/model"
-	"github.com/raziel2244/geckosite/s3"
 )
 
 // Animals returns a list of animals with the given order, type and category.
@@ -55,25 +52,13 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		Order("name").
 		Find(&animals)
 
+	// Load images for all animals on the page.
 	for _, animal := range animals {
-		// get image for animal
-		ch := s3.Client.ListObjects(
-			context.Background(),
-			species.Order,
-			minio.ListObjectsOptions{
-				Prefix:    species.Type + "/" + animal.ID.String(),
-				Recursive: true,
-				MaxKeys:   1,
-			},
-		)
-		// store into the animal struct
-		for object := range ch {
-			path := "/s3/" + species.Order + "/" + object.Key
-			animal.Images = append(animal.Images, path)
-		}
+		images := animal.LoadImages()
 
-		if pageData.Image == "" && len(animal.Images) > 0 {
-			pageData.Image = animal.Images[0]
+		// Set page image to first image found.
+		if pageData.Image == "" && len(images) > 0 {
+			pageData.Image = images[0]
 		}
 	}
 

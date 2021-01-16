@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"context"
 	"fmt"
 	"html/template"
 	"math/rand"
@@ -9,10 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/minio/minio-go/v7"
 	"github.com/raziel2244/geckosite/database"
 	"github.com/raziel2244/geckosite/database/model"
-	"github.com/raziel2244/geckosite/s3"
 )
 
 // Home returns the home page.
@@ -78,23 +75,11 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 		for _, animal := range animals {
 			// get images for animal
-			var images []string
-			ch := s3.Client.ListObjects(
-				context.Background(),
-				splitPath[1],
-				minio.ListObjectsOptions{
-					Prefix:    splitPath[2] + "/" + animal.ID.String(),
-					Recursive: true,
-				},
-			)
-			for object := range ch {
-				path := "/s3/" + splitPath[1] + "/" + object.Key
-				images = append(images, path)
-			}
+			images := animal.LoadImages()
 
 			fmt.Println(images)
 
-			// pick random one for card
+			// pick one for card
 			if len(images) > 0 {
 				data.Cards[c].Image = images[0]
 				break

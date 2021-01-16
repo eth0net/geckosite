@@ -1,9 +1,12 @@
 package model
 
 import (
+	"context"
 	"time"
 
 	"github.com/google/uuid"
+	"github.com/minio/minio-go/v7"
+	"github.com/raziel2244/geckosite/s3"
 )
 
 // Animal stores the details for an animal.
@@ -85,4 +88,26 @@ func (a Animal) Lengths() (lengths []*Measurement) {
 		lengths = append(lengths, measurement)
 	}
 	return
+}
+
+// LoadImages retrieves a list of image urls for the animal from the s3 server,
+// stores them in the struct and returns them as a slice.
+func (a *Animal) LoadImages() []string {
+	a.Images = []string{}
+
+	ch := s3.Client.ListObjects(
+		context.Background(),
+		a.Species.Order,
+		minio.ListObjectsOptions{
+			Prefix:    a.Species.Type + "/" + a.ID.String(),
+			Recursive: true,
+		},
+	)
+
+	for object := range ch {
+		path := "/s3/" + a.Species.Order + "/" + object.Key
+		a.Images = append(a.Images, path)
+	}
+
+	return a.Images
 }
