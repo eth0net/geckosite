@@ -24,8 +24,10 @@
     <p id="species-latin">{{.Animal.Species.LatinName}}</p>
     <p id="description">{{.Animal.Description}}</p>
     <div id="list">
+      {{with .Animal.Reference}}
       <h3>Reference:</h3>
-      <span>{{.Animal.Reference}}</span>
+      <span>{{.}}</span>
+      {{end}}
       <h3>Species:</h3>
       <span>{{.Animal.Species.Name}}</span>
       <h3>Sex:</h3>
