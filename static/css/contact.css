@@ -54,6 +54,11 @@ h2 {
   color: var(--text-secondary);
 }
 
+#contact > .h-captcha {
+  display: flex;
+  justify-content: center;
+}
+
 #contact > #website {
   display: none;
 }

@@ -5,6 +5,7 @@
 {{end}}
 {{define "head"}}
 <link rel="stylesheet" href="/static/css/contact.css"/>
+<script src="https://hcaptcha.com/1/api.js" async defer></script>
 <script>
 var form = document.forms.contact
 form.onsubmit = function(ev) {
@@ -50,6 +51,7 @@ form.onsubmit = function(ev) {
       <input type="text" id="email" name="email" placeholder="Email" required>
     </div>
     <textarea id="message" name="message" placeholder="Message" required></textarea>
+    <div class="h-captcha" data-sitekey="{{.CaptchaKey}}"></div>
     <button>Submit</button>
     {{if .Success}}
     <p>Message sent</p>
