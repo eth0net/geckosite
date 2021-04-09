@@ -1,6 +1,6 @@
 module github.com/raziel2244/geckosite
 
-go 1.15
+go 1.16
 
 require (
 	github.com/google/uuid v1.1.2
