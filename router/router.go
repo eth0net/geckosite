@@ -7,6 +7,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/raziel2244/geckosite/router/handlers"
+	"github.com/raziel2244/geckosite/static"
 )
 
 var (
@@ -22,7 +23,7 @@ func Init() *mux.Router {
 
 		Router.NotFoundHandler = http.HandlerFunc(handlers.NotFound)
 
-		fs := http.FileServer(http.Dir("static"))
+		fs := http.FileServer(http.FS(static.FS))
 
 		s3Handler := http.StripPrefix("/s3/", http.HandlerFunc(handlers.S3))
 		Router.PathPrefix("/s3/{bucket}").Handler(s3Handler)

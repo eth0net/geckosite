@@ -3,7 +3,6 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"html/template"
 	"io"
 	"log"
 	"net/http"
@@ -12,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/raziel2244/geckosite/mail"
+	"github.com/raziel2244/geckosite/templates"
 )
 
 // Contact returns the contact us page.
@@ -25,8 +25,7 @@ func Contact(w http.ResponseWriter, r *http.Request) {
 		CaptchaKey: os.Getenv("HCAPTCHA_SITE_KEY"),
 	}
 
-	lp, hp := "templates/layout.gohtml", "templates/contact.gohtml"
-	tmpl := template.Must(template.ParseFiles(lp, hp))
+	tmpl := templates.Parse("contact")
 	defer tmpl.ExecuteTemplate(w, "layout", &data)
 
 	if r.Method == http.MethodPost {

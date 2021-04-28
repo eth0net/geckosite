@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"html/template"
 	"net/http"
+
+	"github.com/raziel2244/geckosite/templates"
 )
 
 // Construction returns the under construction page.
@@ -13,7 +14,5 @@ func Construction(w http.ResponseWriter, r *http.Request) {
 		"Page is currently under construction",
 	}
 
-	lp, hp := "templates/layout.gohtml", "templates/message.gohtml"
-	tmpl := template.Must(template.ParseFiles(lp, hp))
-	tmpl.ExecuteTemplate(w, "layout", data)
+	templates.Parse("message").ExecuteTemplate(w, "layout", data)
 }

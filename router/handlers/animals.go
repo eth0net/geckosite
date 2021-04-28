@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"context"
-	"html/template"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -10,6 +9,7 @@ import (
 	"github.com/raziel2244/geckosite/database"
 	"github.com/raziel2244/geckosite/database/model"
 	"github.com/raziel2244/geckosite/s3"
+	"github.com/raziel2244/geckosite/templates"
 )
 
 // Animals returns a list of animals with the given order, type and category.
@@ -79,7 +79,5 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 
 	pageData.Animals = animals
 
-	lp, hp := "templates/layout.gohtml", "templates/animals.gohtml"
-	tmpl := template.Must(template.ParseFiles(lp, hp))
-	tmpl.ExecuteTemplate(w, "layout", pageData)
+	templates.Parse("animals").ExecuteTemplate(w, "layout", pageData)
 }

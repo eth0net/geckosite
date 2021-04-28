@@ -3,7 +3,6 @@ package handlers
 import (
 	"context"
 	"fmt"
-	"html/template"
 	"math/rand"
 	"net/http"
 	"strings"
@@ -13,6 +12,7 @@ import (
 	"github.com/raziel2244/geckosite/database"
 	"github.com/raziel2244/geckosite/database/model"
 	"github.com/raziel2244/geckosite/s3"
+	"github.com/raziel2244/geckosite/templates"
 )
 
 // Home returns the home page.
@@ -104,7 +104,5 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	database.DB.Table("animals").Count(&data.Count)
 
-	lp, hp := "templates/layout.gohtml", "templates/home.gohtml"
-	tmpl := template.Must(template.ParseFiles(lp, hp))
-	tmpl.ExecuteTemplate(w, "layout", data)
+	templates.Parse("home").ExecuteTemplate(w, "layout", data)
 }
