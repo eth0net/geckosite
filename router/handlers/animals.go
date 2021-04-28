@@ -75,6 +75,10 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		if pageData.Image == "" && len(animal.Images) > 0 {
 			pageData.Image = animal.Images[0]
 		}
+
+		if len(animal.Images) == 0 {
+			animal.Images = []string{"/static/img/coming-soon.jpg"}
+		}
 	}
 
 	pageData.Animals = animals

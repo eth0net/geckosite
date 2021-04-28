@@ -75,6 +75,9 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 	pageData := pages[o][t]
 	pageData.Path = r.URL.Path
 	for c, card := range pageData.Cards {
+		// set default card image to coming soon
+		pageData.Cards[c].Image = "/static/img/coming-soon.jpg"
+
 		splitPath := strings.Split(card.Path, "/")
 
 		var species model.Species
@@ -112,7 +115,6 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if len(animals) == 0 {
-			pageData.Cards[c].Image = "/static/img/coming-soon.jpg"
 			continue
 		}
 
