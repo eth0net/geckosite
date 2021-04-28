@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"context"
-	"html/template"
 	"math/rand"
 	"net/http"
 	"strings"
@@ -13,6 +12,7 @@ import (
 	"github.com/raziel2244/geckosite/database"
 	"github.com/raziel2244/geckosite/database/model"
 	"github.com/raziel2244/geckosite/s3"
+	"github.com/raziel2244/geckosite/templates"
 )
 
 // Cards returns a page containing cards for child routes.
@@ -146,7 +146,5 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	lp, hp := "templates/layout.gohtml", "templates/cards.gohtml"
-	tmpl := template.Must(template.ParseFiles(lp, hp))
-	tmpl.ExecuteTemplate(w, "layout", pageData)
+	templates.Parse("cards").ExecuteTemplate(w, "layout", pageData)
 }

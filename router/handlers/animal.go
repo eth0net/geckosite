@@ -12,6 +12,7 @@ import (
 	"github.com/raziel2244/geckosite/database"
 	"github.com/raziel2244/geckosite/database/model"
 	"github.com/raziel2244/geckosite/s3"
+	"github.com/raziel2244/geckosite/templates"
 	"gorm.io/gorm/clause"
 )
 
@@ -66,12 +67,11 @@ func Animal(w http.ResponseWriter, r *http.Request) {
 		animal.Images = append(animal.Images, path)
 	}
 
-	lp, hp := "templates/layout.gohtml", "templates/animal.gohtml"
 	tmpl := template.New("Animal").Funcs(template.FuncMap{
 		"formatDate": func(t *time.Time) string {
 			return t.Format("02/01/2006")
 		},
 	})
-	tmpl = template.Must(tmpl.ParseFiles(lp, hp))
+	tmpl = templates.ParseInto(tmpl, "animal")
 	tmpl.ExecuteTemplate(w, "layout", pageData)
 }
