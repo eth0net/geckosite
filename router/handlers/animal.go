@@ -66,6 +66,9 @@ func Animal(w http.ResponseWriter, r *http.Request) {
 		path := "/s3/" + animal.Species.Order + "/" + object.Key
 		animal.Images = append(animal.Images, path)
 	}
+	if len(animal.Images) == 0 {
+		animal.Images = []string{"/static/img/coming-soon.jpg"}
+	}
 
 	tmpl := template.New("Animal").Funcs(template.FuncMap{
 		"formatDate": func(t *time.Time) string {

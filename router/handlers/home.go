@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"context"
-	"fmt"
 	"math/rand"
 	"net/http"
 	"strings"
@@ -37,6 +36,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	rand.Seed(time.Now().Unix())
 
 	for c, card := range data.Cards {
+		// set default card image to coming soon
+		data.Cards[c].Image = "/static/img/coming-soon.jpg"
+
 		splitPath := strings.Split(card.Path, "/")
 
 		var species = &model.Species{}
@@ -67,7 +69,6 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if len(animals) == 0 {
-			data.Cards[c].Image = "/static/img/coming-soon.jpg"
 			continue
 		}
 
@@ -91,8 +92,6 @@ func Home(w http.ResponseWriter, r *http.Request) {
 				path := "/s3/" + splitPath[1] + "/" + object.Key
 				images = append(images, path)
 			}
-
-			fmt.Println(images)
 
 			// pick random one for card
 			if len(images) > 0 {
