@@ -36,11 +36,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    logging:
-      driver: local
   db:
     image: postgres:alpine
     restart: unless-stopped
+    ports:
+      - "5432:5432"
     networks:
       - private
     volumes:
@@ -54,8 +54,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    logging:
-      driver: local
   minio:
     image: minio/minio
     restart: unless-stopped
@@ -75,8 +73,6 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
-    logging:
-      driver: local
 networks:
   private:
   web:
