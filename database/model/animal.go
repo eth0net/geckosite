@@ -1,46 +1,108 @@
 package model
 
 import (
-	"time"
+	"database/sql"
+	"fmt"
 
 	"github.com/google/uuid"
 )
+
+// animalError contains details of an Animal-related error.
+type animalError struct {
+	message string
+	animal  Animal
+}
+
+// Error implements error interface.
+func (ae animalError) Error() string {
+	return fmt.Sprintf("%s: %#v", ae.message, ae.animal)
+}
 
 // Animal stores the details for an animal.
 type Animal struct {
 	UUID
 	Common
 
-	// Details specific to the animal.
-	Reference   string     `json:"reference"`
-	Name        string     `json:"name"`
-	Description string     `json:"description"`
-	Images      []string   `json:"images" gorm:"-"`
-	Species     *Species   `json:"species"`
-	SpeciesID   *uuid.UUID `json:"-" gorm:"not null"`
-	Sex         string     `json:"sex" gorm:"default:Unknown;not null;check:sex IN ('Male','Female','Unknown')"`
-	Status      string     `json:"status" gorm:"not null;check:status IN ('Non-Breeder','Breeder','Future Breeder','Holdback','For Sale','Sold')"`
+	Name        sql.NullString `json:"name" gorm:"unique"`
+	Reference   sql.NullString `json:"reference" gorm:"unique"`
+	Description sql.NullString `json:"description"`
+	Sex         string         `json:"sex" gorm:"default:Unknown;not null;check:sex IN ('Male','Female','Unknown')"`
+	Status      string         `json:"status" gorm:"default:Holdback;not null;check:status IN ('Non-Breeder','Breeder','Future Breeder','Holdback','For Sale','Sold','Other')"`
+	Species     *Species       `json:"species"`
+	SpeciesID   *uuid.UUID     `json:"-" gorm:"type:uuid;not null"`
+	LaidAt      sql.NullTime   `json:"laidAt" gorm:"type:date"`
+	HatchedAt   sql.NullTime   `json:"hatchedAt" gorm:"type:date"`
 
-	// Important dates for our records.
-	DateLaid    *time.Time `json:"dateLaid"`
-	DateHatched *time.Time `json:"dateHatched"`
-	DateBought  *time.Time `json:"dateBought"`
-	DateSold    *time.Time `json:"dateSold"`
+	BoughtAt     sql.NullTime `json:"boughtAt" gorm:"type:date"`
+	BoughtFrom   *Contact     `json:"boughtFrom"`
+	BoughtFromID *uuid.UUID   `json:"-" gorm:"type:uuid"`
+	SoldAt       sql.NullTime `json:"soldAt" gorm:"type:date"`
+	SoldTo       *Contact     `json:"soldTo"`
+	SoldToID     *uuid.UUID   `json:"-" gorm:"type:uuid"`
 
-	// Relations to other animals.
-	Father   *Animal    `json:"father"`
-	FatherID *uuid.UUID `json:"-"`
-	Mother   *Animal    `json:"mother"`
-	MotherID *uuid.UUID `json:"-"`
+	Parents  []*Animal `json:"parents" gorm:"many2many:animal_parents;foreignKey:id;joinForeignKey:child_id;references:id,sex;joinReferences:parent_id,parent_sex"`
+	Children []*Animal `json:"children" gorm:"many2many:animal_parents;foreignKey:id,sex;joinForeignKey:parent_id,parent_sex;references:id;joinReferences:child_id"`
 
-	// PossibleFathers []*Animal `json:"possibleFathers" gorm:"many2many:animal_parents;foreignKey:id,sex;"`
-	// PossibleMothers []*Animal `json:"possibleMothers" gorm:"many2many:animal_parents;foreignKey:id,sex;"`
-	// Children []Animal
-
-	// Traits         []*Gene `json:"traits"`
-	// PossibleTraits []*Gene `json:"possibleTraits"`
-
+	Traits       []*Trait       `json:"traits" gorm:"many2many:animal_traits;"`
 	Measurements []*Measurement `json:"measurements"`
+
+	Images []string `json:"images" gorm:"-"`
+}
+
+// Father returns the father of the animal, if it is certain.
+// See Animal.PossibleFathers for a list of possible fathers.
+func (a Animal) Father() (father *Animal, err error) {
+	var possibleFathers []*Animal
+	for _, parent := range a.Parents {
+		if parent.Sex != "Male" {
+			continue
+		}
+		possibleFathers = append(possibleFathers, parent)
+	}
+	if len(possibleFathers) != 1 {
+		return nil, &animalError{"multiple possible fathers for animal", a}
+	}
+	return possibleFathers[0], nil
+}
+
+// PossibleFathers returns a list of all possible fathers for the animal.
+// See Animal.Father for a certain single result, if known.
+func (a Animal) PossibleFathers() (possibleFathers []*Animal) {
+	for _, parent := range a.Parents {
+		if parent.Sex != "Male" {
+			continue
+		}
+		possibleFathers = append(possibleFathers, parent)
+	}
+	return possibleFathers
+}
+
+// Mother returns the mother of the animal, if it is certain.
+// See Animal.PossibleMothers for a list of possible mothers.
+func (a Animal) Mother() (mother *Animal, err error) {
+	var possibleMothers []*Animal
+	for _, parent := range a.Parents {
+		if parent.Sex != "Female" {
+			continue
+		}
+		possibleMothers = append(possibleMothers, parent)
+	}
+	if len(possibleMothers) != 1 {
+		return nil, &animalError{"multiple possible mothers for animal", a}
+	}
+	return possibleMothers[0], nil
+}
+
+// PossibleMothers returns a list of all possible mothers for the animal.
+// See Animal.Mother for a certain single result, if known.
+func (a Animal) PossibleMothers() (possibleMothers []*Animal) {
+	for _, parent := range a.Parents {
+		if parent.Sex != "Female" {
+			continue
+		}
+		possibleMothers = append(possibleMothers, parent)
+	}
+	return possibleMothers
 }
 
 // Weight returns the most recent weight measurement of the animal.
@@ -51,7 +113,7 @@ func (a Animal) Weight() (weight *Measurement) {
 		}
 		weight = measurement
 	}
-	return
+	return weight
 }
 
 // Weights returns all of the weight measurements for the animal.
@@ -62,7 +124,7 @@ func (a Animal) Weights() (weights []*Measurement) {
 		}
 		weights = append(weights, measurement)
 	}
-	return
+	return weights
 }
 
 // Length returns the most recent length measurement of the animal.
@@ -73,7 +135,7 @@ func (a Animal) Length() (length *Measurement) {
 		}
 		length = measurement
 	}
-	return
+	return length
 }
 
 // Lengths returns all of the length measurements for the animal.
@@ -84,5 +146,5 @@ func (a Animal) Lengths() (lengths []*Measurement) {
 		}
 		lengths = append(lengths, measurement)
 	}
-	return
+	return lengths
 }

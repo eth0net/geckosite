@@ -35,9 +35,15 @@ func Init() *gorm.DB {
 
 		DB.AutoMigrate(
 			&model.Animal{},
+			&model.AnimalParent{},
+			&model.Contact{},
+			&model.Measurement{},
 			&model.Species{},
 			&model.Trait{},
 		)
+
+		DB.SetupJoinTable(&model.Animal{}, "Parents", &model.AnimalParent{})
+		DB.SetupJoinTable(&model.Animal{}, "Children", &model.AnimalParent{})
 	})
 
 	return DB
