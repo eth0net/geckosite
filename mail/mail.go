@@ -18,6 +18,7 @@ type Client struct {
 
 // New creates a new mail client.
 func NewClient(email *mail.Email) (client *Client) {
+	client = &Client{}
 	apiKey := os.Getenv("SENDGRID_API_KEY")
 	client.client = sendgrid.NewSendClient(apiKey)
 	client.Email = email
