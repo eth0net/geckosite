@@ -8,10 +8,16 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"strings"
 
 	"github.com/raziel2244/geckosite/mail"
 	"github.com/raziel2244/geckosite/templates"
+)
+
+const (
+	basePlain = "Name: %v\r\nEmail: %v\r\nMessage: %v\r\n"
+	baseHTML  = `<div><b style="color:orange">Name:</b> %v</div>
+<div><b style="color:orange">Email:</b> %v</div>
+<div><b style="color:orange">Message:</b> %v</div>`
 )
 
 // Contact returns the contact us page.
@@ -75,20 +81,24 @@ func Contact(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		to := mail.NewEmail("Enquiries", "enquiries@hollyshatchlings.co.uk")
+		email := mail.NewEmail("Enquiries", "enquiries@hollyshatchlings.co.uk")
+		client := mail.NewClient(email)
+
 		subject := "Website Enquiry from " + values.Name
+		text := fmt.Sprintf(basePlain, values.Name, values.Email, values.Message)
+		html := fmt.Sprintf(baseHTML, values.Name, values.Email, values.Message)
 
-		basePlain := "Name: %v\r\nEmail: %v\r\nMessage: %v\r\n"
-		baseHTML := strings.TrimSpace(`
-<div><b style="color:orange">Name:</b> %v</div>
-<div><b style="color:orange">Email:</b> %v</div>
-<div><b style="color:orange">Message:</b> %v</div>
-		`)
+		replyTo := mail.NewEmail(values.Name, values.Email)
 
-		contentPlain := fmt.Sprintf(basePlain, values.Name, values.Email, values.Message)
-		contentHTML := fmt.Sprintf(baseHTML, values.Name, values.Email, values.Message)
+		msg := mail.Message{
+			To:      email,
+			Subject: subject,
+			Text:    text,
+			HTML:    html,
+			ReplyTo: replyTo,
+		}
 
-		err = mail.Send(to, subject, contentPlain, contentHTML)
+		err = client.Send(msg)
 		if err == nil {
 			data.Success = true
 		}
