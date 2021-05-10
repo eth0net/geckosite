@@ -13,4 +13,6 @@ type Contact struct {
 	Email   sql.NullString `json:"email"`
 	Website sql.NullString `json:"website"`
 	Note    sql.NullString `json:"note"`
+
+	Transactions []*Transaction `json:"transactions"`
 }

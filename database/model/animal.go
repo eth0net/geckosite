@@ -43,8 +43,9 @@ type Animal struct {
 	Parents  []*Animal `json:"parents" gorm:"many2many:animal_parents;foreignKey:id;joinForeignKey:child_id;references:id,sex;joinReferences:parent_id,parent_sex"`
 	Children []*Animal `json:"children" gorm:"many2many:animal_parents;foreignKey:id,sex;joinForeignKey:parent_id,parent_sex;references:id;joinReferences:child_id"`
 
-	Traits       []*Trait       `json:"traits" gorm:"many2many:animal_traits;"`
 	Measurements []*Measurement `json:"measurements"`
+	Traits       []*Trait       `json:"traits" gorm:"many2many:animal_traits"`
+	Transactions []*Transaction `json:"transactions" gorm:"many2many:transaction_animals"`
 
 	Images []string `json:"images" gorm:"-"`
 }

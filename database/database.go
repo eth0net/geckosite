@@ -40,6 +40,7 @@ func Init() *gorm.DB {
 			&model.Measurement{},
 			&model.Species{},
 			&model.Trait{},
+			&model.Transaction{},
 		)
 
 		DB.SetupJoinTable(&model.Animal{}, "Parents", &model.AnimalParent{})
