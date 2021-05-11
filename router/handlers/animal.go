@@ -46,10 +46,10 @@ func Animal(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	if len(animal.Name) > 0 && isPersonal {
-		pageData.Title = animal.Name
-	} else if len(animal.Reference) > 0 {
-		pageData.Title = animal.Reference
+	if isPersonal && animal.Name.Valid && len(animal.Name.String) > 0 {
+		pageData.Title = animal.Name.String
+	} else if animal.Reference.Valid && len(animal.Reference.String) > 0 {
+		pageData.Title = animal.Reference.String
 	} else {
 		pageData.Title = animal.Species.Name
 	}
