@@ -106,28 +106,6 @@ func (a Animal) PossibleMothers() (possibleMothers []*Animal) {
 	return possibleMothers
 }
 
-// Weight returns the most recent weight measurement of the animal.
-func (a Animal) Weight() (weight *Measurement) {
-	for _, measurement := range a.Measurements {
-		if measurement.Type != "Weight" {
-			continue
-		}
-		weight = measurement
-	}
-	return weight
-}
-
-// Weights returns all of the weight measurements for the animal.
-func (a Animal) Weights() (weights []*Measurement) {
-	for _, measurement := range a.Measurements {
-		if measurement.Type != "Weight" {
-			continue
-		}
-		weights = append(weights, measurement)
-	}
-	return weights
-}
-
 // Length returns the most recent length measurement of the animal.
 func (a Animal) Length() (length *Measurement) {
 	for _, measurement := range a.Measurements {
@@ -148,4 +126,26 @@ func (a Animal) Lengths() (lengths []*Measurement) {
 		lengths = append(lengths, measurement)
 	}
 	return lengths
+}
+
+// Weight returns the most recent weight measurement of the animal.
+func (a Animal) Weight() (weight *Measurement) {
+	for _, measurement := range a.Measurements {
+		if measurement.Type != "Weight" {
+			continue
+		}
+		weight = measurement
+	}
+	return weight
+}
+
+// Weights returns all of the weight measurements for the animal.
+func (a Animal) Weights() (weights []*Measurement) {
+	for _, measurement := range a.Measurements {
+		if measurement.Type != "Weight" {
+			continue
+		}
+		weights = append(weights, measurement)
+	}
+	return weights
 }
