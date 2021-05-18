@@ -20,7 +20,7 @@ var baseTemplateFuncMap = template.FuncMap{
 		}
 		year += strconv.Itoa(now)
 
-		return fmt.Sprintf("Ⓒ Copyright %s %s", year, holder)
+		return fmt.Sprintf("Ⓒ %s %s", year, holder)
 	},
 }
 
