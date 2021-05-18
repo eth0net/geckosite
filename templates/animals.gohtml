@@ -13,7 +13,7 @@
 <div id="cardbox">
   {{ if .Animals }}
   {{ range .Animals }}
-  <a class="card" href="{{.ID}}">
+  <a class="card" href="../{{.ID}}">
     <img src="{{with .Images}}{{with index . 0}}{{.}}{{end}}{{end}}" alt="{{.Name.String}} image" />
     <div class="info">
       <span class="spacer"></span>

@@ -27,9 +27,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		Title: "Home",
 		Path:  r.URL.Path,
 		Cards: []card{
-			{"Crested Geckos", "/geckos/crested", ""},
-			{"Gargoyle Geckos", "/geckos/gargoyle", ""},
-			{"Leopard Geckos", "/geckos/leopard", ""},
+			{"Crested Geckos", "/geckos/crested/", ""},
+			{"Gargoyle Geckos", "/geckos/gargoyle/", ""},
+			{"Leopard Geckos", "/geckos/leopard/", ""},
 		},
 	}
 

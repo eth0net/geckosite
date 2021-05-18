@@ -35,12 +35,7 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	if _, found := pageDataMap[vars["id"]]; !found {
-		Animal(w, r)
-		return
-	}
-
-	pageData := pageDataMap[vars["id"]]
+	pageData := pageDataMap[vars["status"]]
 	pageData.Path = r.URL.Path
 
 	var species model.Species
