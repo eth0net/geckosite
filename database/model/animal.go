@@ -52,18 +52,12 @@ type Animal struct {
 
 // Father returns the father of the animal, if it is certain.
 // See Animal.PossibleFathers for a list of possible fathers.
-func (a Animal) Father() (father *Animal, err error) {
-	var possibleFathers []*Animal
-	for _, parent := range a.Parents {
-		if parent.Sex != "Male" {
-			continue
-		}
-		possibleFathers = append(possibleFathers, parent)
-	}
+func (a Animal) Father() (father *Animal) {
+	possibleFathers := a.PossibleFathers()
 	if len(possibleFathers) != 1 {
-		return nil, &animalError{"multiple possible fathers for animal", a}
+		return nil
 	}
-	return possibleFathers[0], nil
+	return possibleFathers[0]
 }
 
 // PossibleFathers returns a list of all possible fathers for the animal.
@@ -80,18 +74,12 @@ func (a Animal) PossibleFathers() (possibleFathers []*Animal) {
 
 // Mother returns the mother of the animal, if it is certain.
 // See Animal.PossibleMothers for a list of possible mothers.
-func (a Animal) Mother() (mother *Animal, err error) {
-	var possibleMothers []*Animal
-	for _, parent := range a.Parents {
-		if parent.Sex != "Female" {
-			continue
-		}
-		possibleMothers = append(possibleMothers, parent)
-	}
+func (a Animal) Mother() (mother *Animal) {
+	possibleMothers := a.PossibleMothers()
 	if len(possibleMothers) != 1 {
-		return nil, &animalError{"multiple possible mothers for animal", a}
+		return nil
 	}
-	return possibleMothers[0], nil
+	return possibleMothers[0]
 }
 
 // PossibleMothers returns a list of all possible mothers for the animal.

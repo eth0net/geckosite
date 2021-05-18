@@ -29,30 +29,30 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 			"": {
 				Title: "Geckos",
 				Cards: []card{
-					{"Crested Geckos", "/geckos/crested", ""},
-					{"Gargoyle Geckos", "/geckos/gargoyle", ""},
-					{"Leopard Geckos", "/geckos/leopard", ""},
+					{"Crested Geckos", "/geckos/crested/", ""},
+					{"Gargoyle Geckos", "/geckos/gargoyle/", ""},
+					{"Leopard Geckos", "/geckos/leopard/", ""},
 				}},
 			"crested": {
 				Title: "Crested Geckos",
 				Cards: []card{
-					{"Personal", "/geckos/crested/personal", ""},
-					{"Holdbacks", "/geckos/crested/holdbacks", ""},
-					{"For Sale", "/geckos/crested/for-sale", ""},
+					{"Personal", "/geckos/crested/personal/", ""},
+					{"Holdbacks", "/geckos/crested/holdbacks/", ""},
+					{"For Sale", "/geckos/crested/for-sale/", ""},
 				}},
 			"gargoyle": {
 				Title: "Gargoyle Geckos",
 				Cards: []card{
-					{"Personal", "/geckos/gargoyle/personal", ""},
-					{"Holdbacks", "/geckos/gargoyle/holdbacks", ""},
-					{"For Sale", "/geckos/gargoyle/for-sale", ""},
+					{"Personal", "/geckos/gargoyle/personal/", ""},
+					{"Holdbacks", "/geckos/gargoyle/holdbacks/", ""},
+					{"For Sale", "/geckos/gargoyle/for-sale/", ""},
 				}},
 			"leopard": {
 				Title: "Leopard Geckos",
 				Cards: []card{
-					{"Personal", "/geckos/leopard/personal", ""},
-					{"Holdbacks", "/geckos/leopard/holdbacks", ""},
-					{"For Sale", "/geckos/leopard/for-sale", ""},
+					{"Personal", "/geckos/leopard/personal/", ""},
+					{"Holdbacks", "/geckos/leopard/holdbacks/", ""},
+					{"For Sale", "/geckos/leopard/for-sale/", ""},
 				}},
 		},
 	}

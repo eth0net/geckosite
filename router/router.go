@@ -38,9 +38,10 @@ func Init() *mux.Router {
 		Router.Path("/blog").HandlerFunc(handlers.Construction)
 
 		/// use {order} for geckos / snakes
-		Router.Path("/{order}").HandlerFunc(handlers.Cards)
-		Router.Path("/{order}/{type}").HandlerFunc(handlers.Cards)
-		Router.Path("/{order}/{type}/{id}").HandlerFunc(handlers.Animals)
+		Router.Path("/{order}/").HandlerFunc(handlers.Cards)
+		Router.Path("/{order}/{type}/").HandlerFunc(handlers.Cards)
+		Router.Path("/{order}/{type}/{status:[a-z-]+}/").HandlerFunc(handlers.Animals)
+		Router.Path("/{order}/{type}/{id:[a-z0-9-]{36}}").HandlerFunc(handlers.Animal)
 	})
 
 	return Router
