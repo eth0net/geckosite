@@ -38,21 +38,21 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 				Cards: []card{
 					{"Personal", "/geckos/crested/personal/", ""},
 					{"Holdbacks", "/geckos/crested/holdbacks/", ""},
-					{"For Sale", "/geckos/crested/for-sale/", ""},
+					{"Available", "/geckos/crested/available/", ""},
 				}},
 			"gargoyle": {
 				Title: "Gargoyle Geckos",
 				Cards: []card{
 					{"Personal", "/geckos/gargoyle/personal/", ""},
 					{"Holdbacks", "/geckos/gargoyle/holdbacks/", ""},
-					{"For Sale", "/geckos/gargoyle/for-sale/", ""},
+					{"Available", "/geckos/gargoyle/available/", ""},
 				}},
 			"leopard": {
 				Title: "Leopard Geckos",
 				Cards: []card{
 					{"Personal", "/geckos/leopard/personal/", ""},
 					{"Holdbacks", "/geckos/leopard/holdbacks/", ""},
-					{"For Sale", "/geckos/leopard/for-sale/", ""},
+					{"Available", "/geckos/leopard/available/", ""},
 				}},
 		},
 	}
@@ -85,7 +85,7 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 
 		var animals []*model.Animal
 		if len(splitPath) == 3 {
-			// check for sale
+			// check available
 			// check holdbacks
 			// check personal
 
@@ -105,7 +105,7 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 			// check category
 
 			wheres := map[string]string{
-				"for-sale":  "status = 'For Sale'",
+				"available": "status = 'For Sale'",
 				"holdbacks": "status = 'Holdback'",
 				"personal":  "status IN ('Non-Breeder','Breeder','Future Breeder')",
 			}

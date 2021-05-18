@@ -21,8 +21,8 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		Species                   *model.Species
 		Animals                   []*model.Animal
 	}{
-		"for-sale": {
-			Title: "For Sale",
+		"available": {
+			Title: "Available",
 			Where: "status = 'For Sale'",
 		},
 		"holdbacks": {
