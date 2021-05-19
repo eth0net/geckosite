@@ -14,7 +14,7 @@
   {{ if .Animals }}
   {{ range .Animals }}
   <a class="card" href="../{{.ID}}">
-    <img src="{{with .Images}}{{with index . 0}}{{.}}{{end}}{{end}}" alt="{{.Name.String}} image" />
+    <img src="{{with .Images}}{{index . 0}}{{else}}/static/img/coming-soon.jpg{{end}}" alt="{{.Name.String}} image" />
     <div class="info">
       <span class="spacer"></span>
       <h2>{{if .Name.Valid -}}

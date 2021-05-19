@@ -1,18 +1,16 @@
 package handlers
 
 import (
-	"context"
 	"math/rand"
 	"net/http"
 	"strings"
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/minio/minio-go/v7"
 	"github.com/raziel2244/geckosite/database"
 	"github.com/raziel2244/geckosite/database/model"
-	"github.com/raziel2244/geckosite/s3"
 	"github.com/raziel2244/geckosite/templates"
+	"gorm.io/gorm/clause"
 )
 
 // Cards returns a page containing cards for child routes.
@@ -96,9 +94,12 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 			}
 
 			for _, where := range wheres {
-				database.DB.Where("species_id = ? AND "+where, species.ID.String()).Find(&animals)
-				if len(animals) > 0 {
-					break
+				database.DB.
+					Preload(clause.Associations).
+					Where("species_id = ? AND "+where, species.ID).
+					Find(&animals)
+				if len(animals) == 0 {
+					continue
 				}
 			}
 		} else {
@@ -110,8 +111,14 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 				"personal":  "status IN ('Non-Breeder','Breeder','Future Breeder')",
 			}
 
-			where := wheres[splitPath[3]]
-			database.DB.Find(&animals, "species_id = ? AND "+where, species.ID)
+			where := "species_id = ?"
+			if w, ok := wheres[splitPath[3]]; ok {
+				where += " AND " + w
+			}
+			database.DB.
+				Preload(clause.Associations).
+				Where(where, species.ID).
+				Find(&animals)
 		}
 
 		if len(animals) == 0 {
@@ -124,20 +131,7 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 		})
 
 		for _, animal := range animals {
-			// get images for animal
-			var images []string
-			ch := s3.Client.ListObjects(
-				context.Background(),
-				o,
-				minio.ListObjectsOptions{
-					Prefix:    splitPath[2] + "/" + animal.ID.String(),
-					Recursive: true,
-				},
-			)
-			for object := range ch {
-				path := "/s3/" + o + "/" + object.Key
-				images = append(images, path)
-			}
+			images := animal.Images()
 
 			// pick random one for card
 			if len(images) > 0 {
