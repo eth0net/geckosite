@@ -2,21 +2,9 @@ package model
 
 import (
 	"database/sql"
-	"fmt"
 
 	"github.com/google/uuid"
 )
-
-// animalError contains details of an Animal-related error.
-type animalError struct {
-	message string
-	animal  Animal
-}
-
-// Error implements error interface.
-func (ae animalError) Error() string {
-	return fmt.Sprintf("%s: %#v", ae.message, ae.animal)
-}
 
 // Animal stores the details for an animal.
 type Animal struct {
