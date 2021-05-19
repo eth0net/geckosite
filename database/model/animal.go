@@ -1,22 +1,13 @@
 package model
 
 import (
+	"context"
 	"database/sql"
-	"fmt"
 
 	"github.com/google/uuid"
+	"github.com/minio/minio-go/v7"
+	"github.com/raziel2244/geckosite/s3"
 )
-
-// animalError contains details of an Animal-related error.
-type animalError struct {
-	message string
-	animal  Animal
-}
-
-// Error implements error interface.
-func (ae animalError) Error() string {
-	return fmt.Sprintf("%s: %#v", ae.message, ae.animal)
-}
 
 // Animal stores the details for an animal.
 type Animal struct {
@@ -46,8 +37,6 @@ type Animal struct {
 	Measurements []*Measurement `json:"measurements"`
 	Traits       []*Trait       `json:"traits" gorm:"many2many:animal_traits"`
 	Transactions []*Transaction `json:"transactions" gorm:"many2many:transaction_animals"`
-
-	Images []string `json:"images" gorm:"-"`
 }
 
 // Father returns the father of the animal, if it is certain.
@@ -136,4 +125,21 @@ func (a Animal) Weights() (weights []*Measurement) {
 		weights = append(weights, measurement)
 	}
 	return weights
+}
+
+// Images returns a list of images for the animal.
+func (a Animal) Images() (images []string) {
+	ch := s3.Client.ListObjects(
+		context.Background(),
+		a.Species.Order,
+		minio.ListObjectsOptions{
+			Prefix:    a.Species.Type + "/" + a.ID.String(),
+			Recursive: true,
+		},
+	)
+	for object := range ch {
+		path := "/s3/" + a.Species.Order + "/" + object.Key
+		images = append(images, path)
+	}
+	return images
 }

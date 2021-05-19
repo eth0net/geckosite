@@ -11,7 +11,11 @@
 {{define "main"}}
 <div id="animal">
   <div id="gallery">
-    {{range .Animal.Images}}<img src="{{.}}" />{{end}}
+    {{with .Animal.Images -}}
+    {{range .}}<img src="{{.}}" />{{end}}
+    {{- else -}}
+    <img src="/static/img/coming-soon.jpg" />
+    {{- end}}
   </div>
   <div id="details">
 

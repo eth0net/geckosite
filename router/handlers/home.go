@@ -62,40 +62,44 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		}
 
 		for _, where := range wheres {
-			database.DB.Where("species_id = ? AND "+where, species.ID.String()).Find(&animals)
-			if len(animals) > 0 {
-				break
-			}
-		}
-
-		if len(animals) == 0 {
-			continue
-		}
-
-		rand.Seed(time.Now().UnixNano())
-		rand.Shuffle(len(animals), func(i, j int) {
-			animals[i], animals[j] = animals[j], animals[i]
-		})
-
-		for _, animal := range animals {
-			// get images for animal
-			var images []string
-			ch := s3.Client.ListObjects(
-				context.Background(),
-				splitPath[1],
-				minio.ListObjectsOptions{
-					Prefix:    splitPath[2] + "/" + animal.ID.String(),
-					Recursive: true,
-				},
-			)
-			for object := range ch {
-				path := "/s3/" + splitPath[1] + "/" + object.Key
-				images = append(images, path)
+			database.DB.
+				Where("species_id = ? AND "+where, species.ID).
+				Find(&animals)
+			if len(animals) == 0 {
+				continue
 			}
 
-			// pick random one for card
-			if len(images) > 0 {
-				data.Cards[c].Image = images[0]
+			rand.Seed(time.Now().UnixNano())
+			rand.Shuffle(len(animals), func(i, j int) {
+				animals[i], animals[j] = animals[j], animals[i]
+			})
+
+			var image string
+			for _, animal := range animals {
+				// get images for animal
+				var images []string
+				ch := s3.Client.ListObjects(
+					context.Background(),
+					splitPath[1],
+					minio.ListObjectsOptions{
+						Prefix:    splitPath[2] + "/" + animal.ID.String(),
+						Recursive: true,
+					},
+				)
+				for object := range ch {
+					path := "/s3/" + splitPath[1] + "/" + object.Key
+					images = append(images, path)
+				}
+
+				// pick random one for card
+				if len(images) > 0 {
+					image = images[0]
+					break
+				}
+			}
+
+			if len(image) > 0 {
+				data.Cards[c].Image = image
 				break
 			}
 		}

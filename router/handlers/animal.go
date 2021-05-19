@@ -1,17 +1,14 @@
 package handlers
 
 import (
-	"context"
 	"html/template"
 	"net/http"
 	"reflect"
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/minio/minio-go/v7"
 	"github.com/raziel2244/geckosite/database"
 	"github.com/raziel2244/geckosite/database/model"
-	"github.com/raziel2244/geckosite/s3"
 	"github.com/raziel2244/geckosite/templates"
 	"gorm.io/gorm/clause"
 )
@@ -52,22 +49,6 @@ func Animal(w http.ResponseWriter, r *http.Request) {
 		pageData.Title = animal.Reference.String
 	} else {
 		pageData.Title = animal.Species.Name
-	}
-
-	ch := s3.Client.ListObjects(
-		context.Background(),
-		animal.Species.Order,
-		minio.ListObjectsOptions{
-			Prefix:    animal.Species.Type + "/" + animal.ID.String(),
-			Recursive: true,
-		},
-	)
-	for object := range ch {
-		path := "/s3/" + animal.Species.Order + "/" + object.Key
-		animal.Images = append(animal.Images, path)
-	}
-	if len(animal.Images) == 0 {
-		animal.Images = []string{"/static/img/coming-soon.jpg"}
 	}
 
 	tmpl := template.New("Animal").Funcs(template.FuncMap{
