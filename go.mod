@@ -1,4 +1,4 @@
-module github.com/raziel2244/geckosite
+module github.com/eth0net/geckosite
 
 go 1.16
 

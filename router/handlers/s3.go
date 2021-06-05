@@ -5,9 +5,9 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/eth0net/geckosite/s3"
 	"github.com/gorilla/mux"
 	"github.com/minio/minio-go/v7"
-	"github.com/raziel2244/geckosite/s3"
 )
 
 // S3 handles minio operations.

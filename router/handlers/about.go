@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/raziel2244/geckosite/templates"
+	"github.com/eth0net/geckosite/templates"
 )
 
 // About returns the about us page.

@@ -6,7 +6,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/raziel2244/geckosite/database/model"
+	"github.com/eth0net/geckosite/database/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

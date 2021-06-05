@@ -9,8 +9,8 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/raziel2244/geckosite/mail"
-	"github.com/raziel2244/geckosite/templates"
+	"github.com/eth0net/geckosite/mail"
+	"github.com/eth0net/geckosite/templates"
 )
 
 const (

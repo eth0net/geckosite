@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/eth0net/geckosite/database"
+	"github.com/eth0net/geckosite/database/model"
+	"github.com/eth0net/geckosite/s3"
+	"github.com/eth0net/geckosite/templates"
 	"github.com/minio/minio-go/v7"
-	"github.com/raziel2244/geckosite/database"
-	"github.com/raziel2244/geckosite/database/model"
-	"github.com/raziel2244/geckosite/s3"
-	"github.com/raziel2244/geckosite/templates"
 )
 
 // Home returns the home page.

@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/raziel2244/geckosite/templates"
+	"github.com/eth0net/geckosite/templates"
 )
 
 // NotFound returns the 404 not found page.

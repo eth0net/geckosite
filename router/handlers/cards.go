@@ -6,10 +6,10 @@ import (
 	"strings"
 	"time"
 
+	"github.com/eth0net/geckosite/database"
+	"github.com/eth0net/geckosite/database/model"
+	"github.com/eth0net/geckosite/templates"
 	"github.com/gorilla/mux"
-	"github.com/raziel2244/geckosite/database"
-	"github.com/raziel2244/geckosite/database/model"
-	"github.com/raziel2244/geckosite/templates"
 	"gorm.io/gorm/clause"
 )
 

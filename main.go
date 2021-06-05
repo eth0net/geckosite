@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/raziel2244/geckosite/database"
-	"github.com/raziel2244/geckosite/router"
-	"github.com/raziel2244/geckosite/s3"
+	"github.com/eth0net/geckosite/database"
+	"github.com/eth0net/geckosite/router"
+	"github.com/eth0net/geckosite/s3"
 )
 
 func main() {

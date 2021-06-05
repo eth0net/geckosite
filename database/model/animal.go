@@ -4,9 +4,9 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/eth0net/geckosite/s3"
 	"github.com/google/uuid"
 	"github.com/minio/minio-go/v7"
-	"github.com/raziel2244/geckosite/s3"
 )
 
 // Animal stores the details for an animal.

@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"sync"
 
+	"github.com/eth0net/geckosite/router/handlers"
+	"github.com/eth0net/geckosite/static"
 	"github.com/gorilla/mux"
-	"github.com/raziel2244/geckosite/router/handlers"
-	"github.com/raziel2244/geckosite/static"
 )
 
 var (
