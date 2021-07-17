@@ -58,7 +58,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		wheres := []string{
 			"status = 'For Sale'",
 			"status = 'Holdback'",
-			"status IN ('Non-Breeder','Breeder','Future Breeder')",
+			"status IN ('Breeder','Future Breeder')",
 		}
 
 		for _, where := range wheres {

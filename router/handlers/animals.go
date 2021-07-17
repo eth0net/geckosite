@@ -29,7 +29,7 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		},
 		"personal": {
 			Title: "Our Animals",
-			Where: "status IN ('Non-Breeder','Breeder','Future Breeder')",
+			Where: "status IN ('Breeder','Future Breeder')",
 		},
 	}
 

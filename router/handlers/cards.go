@@ -90,7 +90,7 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 			wheres := []string{
 				"status = 'For Sale'",
 				"status = 'Holdback'",
-				"status IN ('Non-Breeder','Breeder','Future Breeder')",
+				"status IN ('Breeder','Future Breeder')",
 			}
 
 			for _, where := range wheres {
@@ -108,7 +108,7 @@ func Cards(w http.ResponseWriter, r *http.Request) {
 			wheres := map[string]string{
 				"available": "status = 'For Sale'",
 				"holdbacks": "status = 'Holdback'",
-				"personal":  "status IN ('Non-Breeder','Breeder','Future Breeder')",
+				"personal":  "status IN ('Breeder','Future Breeder')",
 			}
 
 			where := "species_id = ?"
