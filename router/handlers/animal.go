@@ -36,7 +36,7 @@ func Animal(w http.ResponseWriter, r *http.Request) {
 	pageData.Animal = &animal
 
 	var isPersonal bool
-	for _, status := range []string{"Future Breeder", "Breeder", "Non Breeder"} {
+	for _, status := range []string{"Future Breeder", "Breeder"} {
 		if status == animal.Status {
 			isPersonal = true
 			break
