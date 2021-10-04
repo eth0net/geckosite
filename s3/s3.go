@@ -23,8 +23,8 @@ func Init() *minio.Client {
 			err       error
 			buckets   = []string{"geckos"}
 			endpoint  = os.Getenv("MINIO_ENDPOINT")
-			accessKey = os.Getenv("MINIO_ACCESS_KEY")
-			secretKey = os.Getenv("MINIO_SECRET_KEY")
+			accessKey = os.Getenv("MINIO_ROOT_USER")
+			secretKey = os.Getenv("MINIO_ROOT_PASSWORD")
 		)
 
 		Client, err = minio.New(endpoint, &minio.Options{

@@ -17,8 +17,8 @@ services:
       DB_USER: ${DB_USER:-geckosite}
       DB_PASSWORD: ${DB_PASSWORD:-geckosite}
       MINIO_ENDPOINT: minio:9000
-      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-geckosite}
-      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-geckosite}
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-geckosite}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-geckosite}
       SENDGRID_API_KEY: ${SENDGRID_API_KEY}
       HCAPTCHA_SITE_KEY: ${HCAPTCHA_SITE_KEY}
       HCAPTCHA_SECRET_KEY: ${HCAPTCHA_SECRET_KEY}
@@ -37,7 +37,7 @@ services:
       timeout: 5s
       retries: 5
   db:
-    image: postgres:alpine
+    image: postgres:13-alpine
     restart: unless-stopped
     ports:
       - "5432:5432"
@@ -57,7 +57,7 @@ services:
   minio:
     image: minio/minio
     restart: unless-stopped
-    command: server /data
+    command: server /data --console-address ":9001"
     ports:
       - "9000:9000"
     networks:
@@ -65,8 +65,8 @@ services:
     volumes:
       - minio_data:/data
     environment:
-      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-geckosite}
-      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-geckosite}
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-geckosite}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-geckosite}
       MINIO_REGION_NAME: eu-west-1
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
