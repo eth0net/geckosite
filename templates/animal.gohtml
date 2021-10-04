@@ -1,86 +1,89 @@
 {{define "title"}}{{.Title}}{{end}}
 {{define "meta"}}
-<meta property="og:title" content="{{.Title}}" />
-{{with .Animal.Images}}{{with index . 0}}
-<meta property="og:image" content="{{.}}" />
-{{end}}{{end}}
+    <meta property="og:title" content="{{.Title}}"/>
+    {{with .Animal.Images}}{{with index . 0}}
+        <meta property="og:image" content="{{.}}"/>
+    {{end}}{{end}}
 {{end}}
 {{define "head"}}
-<link rel="stylesheet" href="/static/css/animal.css" />
+    <link rel="stylesheet" href="/static/css/animal.css"/>
 {{end}}
 {{define "main"}}
-<div id="animal">
-  <div id="gallery">
-    {{with .Animal.Images -}}
-    {{range .}}<img src="{{.}}" />{{end}}
-    {{- else -}}
-    <img src="/static/img/coming-soon.jpg" />
-    {{- end}}
-  </div>
-  <div id="details">
+    <div id="animal">
+        <div id="gallery">
+            {{with .Animal.Images -}}
+                {{range .}}<img src="{{.}}"/>{{end}}
+            {{- else -}}
+                <img src="/static/img/coming-soon.jpg"/>
+            {{- end}}
+        </div>
+        <div id="details">
 
-    {{- if eq .Animal.Status "Non-Breeder" "Breeder" "Future Breeder" -}}
-    <h2 id="title">
-      {{- with .Animal.Name -}}
-      {{if .Valid}}{{.String}}{{else}}...{{end}}
-      {{- end -}}
-    </h2>
-    {{- end -}}
+            {{- if eq .Animal.Status "Non-Breeder" "Breeder" "Future Breeder" -}}
+                <h2 id="title">
+                    {{- with .Animal.Name -}}
+                        {{if .Valid}}{{.String}}{{else}}...{{end}}
+                    {{- end -}}
+                </h2>
+            {{- end -}}
 
-    <h2 id="species-common">{{.Animal.Species.Name}}</h2>
-    <p id="species-latin">{{.Animal.Species.LatinName}}</p>
-    <p id="description">
-      {{- with .Animal.Description -}}
-      {{if .Valid}}{{.String}}{{end}}
-      {{- end -}}
-    </p>
-    <div id="list">
+            <h2 id="species-common">{{.Animal.Species.Name}}</h2>
+            <p id="species-latin">{{.Animal.Species.LatinName}}</p>
+            <p id="description">
+                {{- with .Animal.Description -}}
+                    {{if .Valid}}{{.String}}{{end}}
+                {{- end -}}
+            </p>
+            <div id="list">
 
-      {{- with .Animal.Reference}}{{if .Valid -}}
-      <h3>Reference:</h3>
-      <span>{{.String}}</span>
-      {{- end}}{{end -}}
+                {{- with .Animal.Reference}}{{if .Valid -}}
+                    <h3>Reference:</h3>
+                    <span>{{.String}}</span>
+                {{- end}}{{end -}}
 
-      <h3>Species:</h3>
-      <span>{{.Animal.Species.Name}}</span>
-      <h3>Sex:</h3>
-      <span>{{.Animal.Sex}}</span>
-      <h3>Status:</h3>
-      <span>{{.Animal.Status}}</span>
-      <h3>Updated:</h3>
-      <span>{{formatDate .Animal.UpdatedAt}}</span>
+                <h3>Species:</h3>
+                <span>{{.Animal.Species.Name}}</span>
+                <h3>Sex:</h3>
+                <span>{{.Animal.Sex}}</span>
+                <h3>Status:</h3>
+                <span>{{.Animal.Status}}</span>
+                <h3>Updated:</h3>
+                <span>{{formatDate .Animal.UpdatedAt}}</span>
 
-      {{- with .Animal.LaidAt}}{{if .Valid -}}
-      <h3>Lay Date:</h3>
-      <span>{{formatDate .Time}}</span>
-      {{- end}}{{end -}}
+                {{- with .Animal.LaidAt}}{{if .Valid -}}
+                    <h3>Lay Date:</h3>
+                    <span>{{formatDate .Time}}</span>
+                {{- end}}{{end -}}
 
-      {{- with .Animal.HatchedAt}}{{if .Valid -}}
-      <h3>Hatch Date:</h3>
-      <span>{{formatDate .Time}}</span>
-      {{- end}}{{end -}}
+                {{- with .Animal.HatchedAt}}{{if .Valid -}}
+                    <h3>Hatch Date:</h3>
+                    <span>{{formatDate .Time}}</span>
+                {{- end}}{{end -}}
 
-      {{- with .Animal.BoughtAt}}{{if .Valid -}}
-      <h3>Purchase Date:</h3>
-      <span>{{formatDate .Time}}</span>
-      {{- end}}{{end -}}
+                {{- with .Animal.BoughtAt}}{{if .Valid -}}
+                    <h3>Purchase Date:</h3>
+                    <span>{{formatDate .Time}}</span>
+                {{- end}}{{end -}}
 
-      {{- with .Animal.SoldAt}}{{if .Valid -}}
-      <h3>Sale Date:</h3>
-      <span>{{formatDate .Time}}</span>
-      {{- end}}{{end -}}
+                {{- with .Animal.SoldAt}}{{if .Valid -}}
+                    <h3>Sale Date:</h3>
+                    <span>{{formatDate .Time}}</span>
+                {{- end}}{{end -}}
 
-      {{- with .Animal.Father}}{{if .Name.Valid -}}
-      <h3>Father:</h3>
-      <span><a href="{{.ID}}">{{.Name.String}}</a></span>
-      {{- end}}{{end -}}
+                {{- with .Animal.Father}}{{if .Name.Valid -}}
+                    <h3>Father:</h3>
+                    <span><a href="{{.ID}}">{{.Name.String}}</a></span>
+                {{- end}}{{end -}}
 
-      {{- with .Animal.Mother}}{{if .Name.Valid -}}
-      <h3>Mother:</h3>
-      <span><a href="{{.ID}}">{{.Name.String}}</a></span>
-      {{- end}}{{end -}}
+                {{- with .Animal.Mother}}{{if .Name.Valid -}}
+                    <h3>Mother:</h3>
+                    <span><a href="{{.ID}}">{{.Name.String}}</a></span>
+                {{- end}}{{end -}}
 
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+
+    <script src="/static/js/gallery.js"></script>
+    <script src="/static/js/animal.js"></script>
 {{end}}

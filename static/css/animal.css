@@ -1,88 +1,111 @@
 #animal {
-  display: flex;
-  flex-flow: row wrap;
-  margin: 2rem 1rem;
-  align-items: flex-start;
-  justify-content: center;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 2rem 1rem;
+    align-items: flex-start;
+    justify-content: center;
 }
 
 #animal > #gallery {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(3, minmax(auto, 150px));
-  grid-template-rows: repeat(2, min-content);
+    position: relative;
+}
+
+#animal > #gallery {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(auto, 150px));
+    grid-template-rows: repeat(2, min-content);
 }
 
 #animal > #gallery > img:first-child {
-  grid-column-end: span 3;
+    grid-column-end: span 3;
 }
 
 #animal > #gallery > img {
-  display: inline;
-  border-radius: 1rem;
+    display: inline;
+    border-radius: 1rem;
+}
+
+#animal > #gallery > button {
+    position: absolute;
+    top: 33%;
+    padding: 1rem;
+    color: white;
+    background: var(--bg1);
+    opacity: 0.5;
+    font-weight: bold;
+    user-select: none;
+}
+
+#animal > #gallery > button.prev {
+    left: 0;
+}
+
+#animal > #gallery > button.next {
+    right: 0;
 }
 
 #animal > #details {
-  border-radius: 1rem;
-  background-color: var(--secondary);
-  color: var(--text-secondary);
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  padding: 0.5rem;
+    border-radius: 1rem;
+    background-color: var(--secondary);
+    color: var(--text-secondary);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 0.5rem;
 }
 
 #animal > #details > * {
-  margin: 0.5rem;
-  max-width: fit-content;
+    margin: 0.5rem;
+    max-width: fit-content;
 }
 
 #animal > #details > #description {
-  text-align: center;
+    text-align: center;
 }
 
 #animal > #details > #list {
-  display: grid;
-  align-items: baseline;
-  gap: 0.5rem 1rem;
+    display: grid;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
 }
 
 #animal > #details > #list > * {
-  white-space: nowrap;
+    white-space: nowrap;
 }
 
 @media screen and (min-width: 300px) {
-  #animal > #details > #list {
-    grid-template-columns: repeat(2, auto);
-  }
+    #animal > #details > #list {
+        grid-template-columns: repeat(2, auto);
+    }
 }
 
 @media screen and (min-width: 480px) {
-  #animal > #details > #list {
-    grid-template-columns: repeat(4, auto);
-  }
+    #animal > #details > #list {
+        grid-template-columns: repeat(4, auto);
+    }
 }
 
 @media screen and (max-width: 600px) {
-  #animal > *:not(:last-child) {
-    margin-bottom: 1rem;
-  }
+    #animal > *:not(:last-child) {
+        margin-bottom: 1rem;
+    }
 
-  #animal > #details {
-    width: calc(450px + 2rem);
-  }
+    #animal > #details {
+        width: calc(450px + 2rem);
+    }
 }
 
 @media screen and (min-width: 600px) {
-  #animal {
-    flex-wrap: nowrap;
-  }
+    #animal {
+        flex-wrap: nowrap;
+    }
 
-  #animal > *:not(:last-child) {
-    margin-right: 1rem;
-  }
+    #animal > *:not(:last-child) {
+        margin-right: 1rem;
+    }
 
-  #animal > #details > #list {
-    grid-template-columns: repeat(2, auto);
-  }
+    #animal > #details > #list {
+        grid-template-columns: repeat(2, auto);
+    }
 }
