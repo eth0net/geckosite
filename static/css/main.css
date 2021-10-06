@@ -1,175 +1,175 @@
 @font-face {
-  font-family: Londrina;
-  src: url(/static/font/LondrinaSolid-Regular.ttf);
+    font-family: Londrina;
+    src: url(/static/font/LondrinaSolid-Regular.ttf);
 }
 
 @font-face {
-  font-family: Londrina Light;
-  src: url(/static/font/LondrinaSolid-Light.ttf);
+    font-family: Londrina Light;
+    src: url(/static/font/LondrinaSolid-Light.ttf);
 }
 
 @font-face {
-  font-family: Londrina Thin;
-  src: url(/static/font/LondrinaSolid-Thin.ttf);
+    font-family: Londrina Thin;
+    src: url(/static/font/LondrinaSolid-Thin.ttf);
 }
 
 :root {
-  --navbar: #392033;
-  --primary: #39203380;
-  --secondary: #39203350;
-  --text: #fff4e2;
-  --bg: #ff8967;
-  --bg1: #392033;
-  --bg2: #fd6051;
-  --bg3: #ff8967;
-  --bg4: #fec051;
+    --navbar: #392033;
+    --primary: #39203380;
+    --secondary: #39203350;
+    --text: #fff4e2;
+    --bg: #ff8967;
+    --bg1: #392033;
+    --bg2: #fd6051;
+    --bg3: #ff8967;
+    --bg4: #fec051;
 }
 
 * {
-  margin: 0;
-  box-sizing: border-box;
-  max-width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 a {
-  color: currentColor;
-  text-decoration: none;
+    color: currentColor;
+    text-decoration: none;
 }
 
 h1 {
-  font-size: 1.75rem;
+    font-size: 1.75rem;
 }
 
 img {
-  display: block;
+    display: block;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  background: var(--bg);
-  background: linear-gradient(
-    var(--bg1) 64px,
-    var(--bg2),
-    var(--bg3),
-    var(--bg4) calc(100% - 15px)
-  );
-  color: var(--text);
-  font-family: Londrina;
-  min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    background: linear-gradient(
+            var(--bg1) 64px,
+            var(--bg2),
+            var(--bg3),
+            var(--bg4) calc(100% - 15px)
+    );
+    color: var(--text);
+    font-family: Londrina, sans-serif;
+    min-height: 100vh;
 }
 
 header {
-  color: var(--text-primary);
-  background-color: var(--primary);
-  width: 100%;
+    color: var(--text);
+    background-color: var(--primary);
+    width: 100%;
 }
 
 header > .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header > .container > * {
-  margin: 0;
+    margin: 0;
 }
 
 header > .container > .spacer {
-  background-image: url(/static/img/hhicon.png);
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 3rem;
-  width: 3rem;
-  margin: 0.5rem;
+    background-image: url(/static/img/hhicon.png);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 3rem;
+    width: 3rem;
+    margin: 0.5rem;
 }
 
 header > .container > svg {
-  font-size: 2rem;
-  stroke: currentColor;
-  margin: 1rem;
+    font-size: 2rem;
+    stroke: currentColor;
+    margin: 1rem;
 }
 
 a:hover,
 header svg:hover {
-  opacity: 0.5;
-  cursor: pointer;
+    opacity: 0.5;
+    cursor: pointer;
 }
 
 #navbar {
-  display: flex;
-  align-items: center;
-  background-color: var(--navbar);
-  z-index: 99;
+    display: flex;
+    align-items: center;
+    background-color: var(--navbar);
+    z-index: 99;
 }
 
 #navbar > .dropdown {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
 }
 
 #navbar > .dropdown > .submenu {
-  display: flex;
+    display: flex;
 }
 
 #navbar > .dropdown > .submenu > * {
-  margin: 0.25rem;
+    margin: 0.25rem;
 }
 
 main {
-  display: flex;
-  flex-grow: 1;
-  width: 100%;
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
 }
 
 main > .container > img {
-  margin: 1rem;
-  border-radius: 1rem;
-  width: calc(100% - 2rem);
+    margin: 1rem;
+    border-radius: 1rem;
+    width: calc(100% - 2rem);
 }
 
 footer {
-  color: var(--text-primary);
-  background-color: var(--primary);
-  width: 100%;
+    color: var(--text);
+    background-color: var(--primary);
+    width: 100%;
 }
 
 footer > .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0.5rem;
 }
 
 #license {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-grow: 1;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-grow: 1;
 }
 
 #license > * {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 .container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1080px;
-  width: 100%;
-  overflow-x: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1080px;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .nodisplay {
-  display: none !important;
+    display: none !important;
 }
 
 .nooverflow {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 /* Title font size steps */
@@ -193,33 +193,33 @@ footer > .container {
 
 /* Full size navbar */
 @media screen and (min-width: 800px) {
-  #menu-button {
-    display: none;
-  }
+    #menu-button {
+        display: none;
+    }
 
-  #navbar {
-    flex-grow: 1;
-    justify-content: flex-end;
-    margin: 0 1rem;
-  }
+    #navbar {
+        flex-grow: 1;
+        justify-content: flex-end;
+        margin: 0 1rem;
+    }
 
-  #navbar > *:not(:last-child) {
-    margin-right: 1rem;
-  }
+    #navbar > *:not(:last-child) {
+        margin-right: 1rem;
+    }
 }
 
 /* Mobile navbar */
 @media screen and (max-width: 799px) {
-  #navbar {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    overflow: hidden;
-    height: calc(100vh - 64px);
-    height: calc(var(--vh, 1vh) * 100 - 64px);
-    width: 100vw;
-  }
+    #navbar {
+        display: none;
+        flex-direction: column;
+        justify-content: space-around;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        overflow: hidden;
+        height: calc(100vh - 64px);
+        height: calc(var(--vh, 1vh) * 100 - 64px);
+        width: 100vw;
+    }
 }

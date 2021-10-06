@@ -1,89 +1,89 @@
 h2 {
-  font-size: 4rem;
-  margin: 2rem;
-  text-align: center;
+    font-size: 4rem;
+    margin: 2rem;
+    text-align: center;
 }
 
 #contact-wrap {
-  display: flex;
-  flex-flow: row wrap;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 #welcome-info-social {
-  flex: 1 1 45%;
-  margin: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: var(--secondary);
-  color: var(--text-secondary);
+    flex: 1 1 45%;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--secondary);
+    color: var(--text);
 }
 
 #welcome-info-social p {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 #info-social {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
 }
 
 #info-social svg {
-  vertical-align: text-top;
+    vertical-align: text-top;
 }
 
 #info {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #social {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #contact {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 45%;
-  margin: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: var(--secondary);
-  color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 45%;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--secondary);
+    color: var(--text);
 }
 
 #contact > .h-captcha {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 #contact > #website {
-  display: none;
+    display: none;
 }
 
 #contact p {
-  text-align: center;
+    text-align: center;
 }
 
 #contact > #user {
-  display: flex;
-  flex-flow: row wrap;
+    display: flex;
+    flex-flow: row wrap;
 }
 
 #contact > #user > * {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 #contact > textarea {
-  height: 4rem;
-  resize: none;
+    height: 4rem;
+    resize: none;
 }
 
 #contact input,
 #contact textarea,
 #contact button {
-  margin: 0.5rem;
-  padding: 0.5rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
 }

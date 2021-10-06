@@ -1,79 +1,79 @@
 h2 {
-  border-radius: 1rem;
-  font-size: 4rem;
-  margin: 2rem;
-  text-align: center;
+    border-radius: 1rem;
+    font-size: 4rem;
+    margin: 2rem;
+    text-align: center;
 }
 
 #about {
-  margin: 2rem;
-  font-size: 1.25em;
-  font-family: Londrina Light;
+    margin: 2rem;
+    font-size: 1.25em;
+    font-family: Londrina Light, sans-serif;
 }
 
 #about > *:first-child {
-  font-family: Londrina;
+    font-family: Londrina, sans-serif;
 }
 
 #about > *:not(:last-child) {
-  margin-bottom: 2.5em;
+    margin-bottom: 2.5em;
 }
 
 #about > .row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 #about > .row > div {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 #about > .row > div > h3 {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 #about > .row img {
-  border-radius: 1em;
-  height: auto;
-  width: 250px;
+    border-radius: 1em;
+    height: auto;
+    width: 250px;
 }
 
 @media screen and (max-width: 700px) {
-  #about > .row:first-of-type {
-    flex-wrap: wrap;
-  }
+    #about > .row:first-of-type {
+        flex-wrap: wrap;
+    }
 
-  #about > .row:nth-of-type(2) {
-    flex-wrap: wrap-reverse;
-  }
+    #about > .row:nth-of-type(2) {
+        flex-wrap: wrap-reverse;
+    }
 
-  #about > .row:first-of-type > *:not(:last-child),
-  #about > .row:nth-of-type(2) > *:not(:first-child) {
-    margin: 0 0 1rem 0;
-  }
+    #about > .row:first-of-type > *:not(:last-child),
+    #about > .row:nth-of-type(2) > *:not(:first-child) {
+        margin: 0 0 1rem 0;
+    }
 
-  #about > .row > img {
-    width: auto;
-    min-width: unset;
-  }
+    #about > .row > img {
+        width: auto;
+        min-width: unset;
+    }
 }
 
 @media screen and (min-width: 701px) {
-  #about > .row > *:not(:last-child) {
-    margin: 0 1rem 0 0;
-  }
+    #about > .row > *:not(:last-child) {
+        margin: 0 1rem 0 0;
+    }
 }
 
 @media screen and (min-width: 800px) {
-  #about > .row > div > *:not(:last-child) {
-    margin-bottom: 1rem;
-  }
+    #about > .row > div > *:not(:last-child) {
+        margin-bottom: 1rem;
+    }
 }
 
 @media screen and (min-width: 830px) {
-  #about > .row > img {
-    width: 200px;
-  }
+    #about > .row > img {
+        width: 200px;
+    }
 }
