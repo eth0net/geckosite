@@ -53,12 +53,16 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		// get image for animal
 		images := animal.Images()
 
-		if pageData.Image == "" && len(images) > 0 {
+		if len(images) == 0 {
+			continue
+		}
+
+		pageData.Animals = append(pageData.Animals, animal)
+
+		if pageData.Image == "" {
 			pageData.Image = images[0]
 		}
 	}
-
-	pageData.Animals = animals
 
 	templates.Parse("animals").ExecuteTemplate(w, "layout", pageData)
 }
