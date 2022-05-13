@@ -1,19 +1,14 @@
-package handlers
+package web
 
 import (
-	"net/http"
-
-	"github.com/eth0net/geckosite/database"
 	"github.com/eth0net/geckosite/database/model"
 	"github.com/eth0net/geckosite/templates"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm/clause"
 )
 
 // Animals returns a list of animals with the given order, type and category.
-func Animals(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-
+func (s service) Animals(c *gin.Context) {
 	pageDataMap := map[string]struct {
 		Title, Where, Path, Image string
 		Species                   *model.Species
@@ -33,17 +28,17 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		},
 	}
 
-	pageData := pageDataMap[vars["status"]]
-	pageData.Path = r.URL.Path
+	pageData := pageDataMap[c.Param("id")]
+	pageData.Path = c.Request.URL.Path
 
 	var species model.Species
-	database.DB.
-		Where(&model.Species{Order: vars["order"], Type: vars["type"]}).
+	s.db.
+		Where(&model.Species{Order: c.Param("order"), Type: c.Param("type")}).
 		First(&species)
 	pageData.Species = &species
 
 	var animals []*model.Animal
-	database.DB.
+	s.db.
 		Preload(clause.Associations).
 		Where("species_id = ? AND "+pageData.Where, species.ID).
 		Order("name").
@@ -64,5 +59,5 @@ func Animals(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	templates.Parse("animals").ExecuteTemplate(w, "layout", pageData)
+	templates.Parse("animals").ExecuteTemplate(c.Writer, "layout", pageData)
 }

@@ -1,35 +1,33 @@
-package handlers
+package web
 
 import (
 	"html/template"
-	"net/http"
 	"reflect"
 	"time"
 
-	"github.com/eth0net/geckosite/database"
 	"github.com/eth0net/geckosite/database/model"
 	"github.com/eth0net/geckosite/templates"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm/clause"
 )
 
 // Animal returns a page for a single animal.
-func Animal(w http.ResponseWriter, r *http.Request) {
+func (s service) Animal(c *gin.Context) {
 	pageData := struct {
 		Title, Path string
 		Animal      *model.Animal
 	}{
-		Path: r.URL.Path,
+		Path: c.Request.URL.Path,
 	}
 
 	var animal model.Animal
-	database.DB.Model(&model.Animal{}).
+	s.db.Model(&model.Animal{}).
 		Preload(clause.Associations).
-		Where("id = ?", mux.Vars(r)["id"]).
+		Where("id = ?", c.Param("id")).
 		First(&animal)
 
 	if reflect.ValueOf(animal).IsZero() {
-		NotFound(w, r)
+		s.NotFound(c)
 		return
 	}
 
@@ -57,5 +55,5 @@ func Animal(w http.ResponseWriter, r *http.Request) {
 		},
 	})
 	tmpl = templates.ParseInto(tmpl, "animal")
-	tmpl.ExecuteTemplate(w, "layout", pageData)
+	tmpl.ExecuteTemplate(c.Writer, "layout", pageData)
 }

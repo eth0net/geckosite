@@ -3,6 +3,7 @@ module github.com/eth0net/geckosite
 go 1.16
 
 require (
+	github.com/gin-gonic/gin v1.7.7
 	github.com/google/uuid v1.2.0
 	github.com/gorilla/mux v1.8.0
 	github.com/jackc/pgproto3/v2 v2.0.7 // indirect

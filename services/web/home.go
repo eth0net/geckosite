@@ -1,21 +1,19 @@
-package handlers
+package web
 
 import (
 	"context"
 	"math/rand"
-	"net/http"
 	"strings"
 	"time"
 
-	"github.com/eth0net/geckosite/database"
 	"github.com/eth0net/geckosite/database/model"
-	"github.com/eth0net/geckosite/s3"
 	"github.com/eth0net/geckosite/templates"
+	"github.com/gin-gonic/gin"
 	"github.com/minio/minio-go/v7"
 )
 
 // Home returns the home page.
-func Home(w http.ResponseWriter, r *http.Request) {
+func (s service) Home(c *gin.Context) {
 	type card struct{ Title, Path, Image string }
 	type page struct {
 		Title, Path string
@@ -25,7 +23,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	data := page{
 		Title: "Home",
-		Path:  r.URL.Path,
+		Path:  c.Request.URL.Path,
 		Cards: []card{
 			{"Crested Geckos", "/geckos/crested/", ""},
 			{"Gargoyle Geckos", "/geckos/gargoyle/", ""},
@@ -42,7 +40,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		splitPath := strings.Split(card.Path, "/")
 
 		var species = &model.Species{}
-		database.DB.
+		s.db.
 			Where(&model.Species{Order: splitPath[1], Type: splitPath[2]}).
 			First(species)
 
@@ -62,7 +60,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		}
 
 		for _, where := range wheres {
-			database.DB.
+			s.db.
 				Where("species_id = ? AND "+where, species.ID).
 				Find(&animals)
 			if len(animals) == 0 {
@@ -78,7 +76,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 			for _, animal := range animals {
 				// get images for animal
 				var images []string
-				ch := s3.Client.ListObjects(
+				ch := s.s3.ListObjects(
 					context.Background(),
 					splitPath[1],
 					minio.ListObjectsOptions{
@@ -105,7 +103,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	database.DB.Table("animals").Count(&data.Count)
+	s.db.Table("animals").Count(&data.Count)
 
-	templates.Parse("home").ExecuteTemplate(w, "layout", data)
+	templates.Parse("home").ExecuteTemplate(c.Writer, "layout", data)
 }

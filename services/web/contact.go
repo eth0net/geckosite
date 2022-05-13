@@ -1,4 +1,4 @@
-package handlers
+package web
 
 import (
 	"encoding/json"
@@ -11,6 +11,7 @@ import (
 
 	"github.com/eth0net/geckosite/mail"
 	"github.com/eth0net/geckosite/templates"
+	"github.com/gin-gonic/gin"
 )
 
 const (
@@ -21,25 +22,25 @@ const (
 )
 
 // Contact returns the contact us page.
-func Contact(w http.ResponseWriter, r *http.Request) {
+func (s service) Contact(c *gin.Context) {
 	data := struct {
 		Success                          bool
 		Title, Path, Message, CaptchaKey string
 	}{
 		Title:      "Contact Us",
-		Path:       r.URL.Path,
+		Path:       c.Request.URL.Path,
 		CaptchaKey: os.Getenv("HCAPTCHA_SITE_KEY"),
 	}
 
 	tmpl := templates.Parse("contact")
-	defer tmpl.ExecuteTemplate(w, "layout", &data)
+	defer tmpl.ExecuteTemplate(c.Writer, "layout", &data)
 
-	if r.Method == http.MethodPost {
+	if c.Request.Method == http.MethodPost {
 		values := struct{ Name, Email, Message, Token string }{
-			r.FormValue("name"),
-			r.FormValue("email"),
-			r.FormValue("message"),
-			r.FormValue("h-captcha-response"),
+			c.Request.FormValue("name"),
+			c.Request.FormValue("email"),
+			c.Request.FormValue("message"),
+			c.Request.FormValue("h-captcha-response"),
 		}
 
 		res, err := http.PostForm("https://hcaptcha.com/siteverify", url.Values{
