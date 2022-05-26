@@ -6,10 +6,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/eth0net/geckosite/database/model"
-	"github.com/eth0net/geckosite/templates"
 	"github.com/gin-gonic/gin"
 	"github.com/minio/minio-go/v7"
+
+	"github.com/eth0net/geckosite/systems/database/model"
+	"github.com/eth0net/geckosite/systems/templates"
 )
 
 // Home returns the home page.

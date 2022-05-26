@@ -5,10 +5,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/eth0net/geckosite/database/model"
-	"github.com/eth0net/geckosite/templates"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm/clause"
+
+	"github.com/eth0net/geckosite/systems/database/model"
+	"github.com/eth0net/geckosite/systems/templates"
 )
 
 // Cards returns a page containing cards for child routes.

@@ -1,13 +1,15 @@
 package main
 
 import (
-	"github.com/eth0net/geckosite/database"
-	"github.com/eth0net/geckosite/s3"
-	"github.com/eth0net/geckosite/services/web"
-	"github.com/eth0net/geckosite/static"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+
+	"github.com/eth0net/geckosite/services/web"
+	"github.com/eth0net/geckosite/systems/database"
+	"github.com/eth0net/geckosite/systems/s3"
+	"github.com/eth0net/geckosite/systems/static"
 )
 
 func main() {

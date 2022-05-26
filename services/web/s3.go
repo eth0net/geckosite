@@ -1,9 +1,10 @@
 package web
 
 import (
+	"io"
+
 	"github.com/gin-gonic/gin"
 	"github.com/minio/minio-go/v7"
-	"io"
 )
 
 // S3 handles minio operations.

@@ -6,9 +6,10 @@ import (
 	"os"
 	"sync"
 
-	"github.com/eth0net/geckosite/database/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+
+	"github.com/eth0net/geckosite/systems/database/model"
 )
 
 var (

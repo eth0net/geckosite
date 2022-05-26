@@ -1,8 +1,9 @@
 package web
 
 import (
-	"github.com/eth0net/geckosite/templates"
 	"github.com/gin-gonic/gin"
+
+	"github.com/eth0net/geckosite/systems/templates"
 )
 
 // NotFound returns the 404 not found page.

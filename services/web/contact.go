@@ -9,9 +9,10 @@ import (
 	"net/url"
 	"os"
 
-	"github.com/eth0net/geckosite/mail"
-	"github.com/eth0net/geckosite/templates"
 	"github.com/gin-gonic/gin"
+
+	"github.com/eth0net/geckosite/systems/mail"
+	"github.com/eth0net/geckosite/systems/templates"
 )
 
 const (

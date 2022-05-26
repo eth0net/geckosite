@@ -4,7 +4,8 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/eth0net/geckosite/s3"
+	"github.com/eth0net/geckosite/systems/s3"
+
 	"github.com/google/uuid"
 	"github.com/minio/minio-go/v7"
 )
