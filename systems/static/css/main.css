@@ -14,15 +14,19 @@
 }
 
 :root {
-    --navbar: #392033;
-    --primary: #39203380;
-    --secondary: #39203350;
-    --text: #fff4e2;
-    --bg: #ff8967;
-    --bg1: #392033;
-    --bg2: #fd6051;
-    --bg3: #ff8967;
-    --bg4: #fec051;
+    /*--bg: #222;*/
+    --bg: #0C1411;
+    --header: #000;
+    --modal: #0C321B;
+    --footer: #000;
+    --text: #fff;
+    /*--accent: #732;*/
+    --accent: #e0513c;
+    /*--bg: #171413;*/
+    /*--header: #0A0A09;*/
+    /*--modal: #9C4638;*/
+    /*--footer: #0C1411;*/
+    /*--text: #fff;*/
 }
 
 * {
@@ -48,12 +52,6 @@ body {
     display: flex;
     flex-direction: column;
     background: var(--bg);
-    background: linear-gradient(
-            var(--bg1) 64px,
-            var(--bg2),
-            var(--bg3),
-            var(--bg4) calc(100% - 15px)
-    );
     color: var(--text);
     font-family: Londrina, sans-serif;
     min-height: 100vh;
@@ -61,7 +59,7 @@ body {
 
 header {
     color: var(--text);
-    background-color: var(--primary);
+    background-color: var(--header);
     width: 100%;
 }
 
@@ -93,14 +91,14 @@ header > .container > svg {
 
 a:hover,
 header svg:hover {
-    opacity: 0.5;
+    /*opacity: 0.5;*/
+    color: var(--accent);
     cursor: pointer;
 }
 
 #navbar {
     display: flex;
     align-items: center;
-    background-color: var(--navbar);
     z-index: 99;
 }
 
@@ -132,7 +130,7 @@ main > .container > img {
 
 footer {
     color: var(--text);
-    background-color: var(--primary);
+    background-color: var(--footer);
     width: 100%;
 }
 
@@ -172,25 +170,6 @@ footer > .container {
     overflow: hidden;
 }
 
-/* Title font size steps */
-/* @media screen and (max-width: 350px) {
-  header > .container > #title > h1 {
-    font-size: 1.75em;
-  }
-} */
-
-/* @media screen and (max-width: 320px) {
-  header > .container > #title > h1 {
-    font-size: 1.5em;
-  }
-} */
-
-/* @media screen and (max-width: 290px) {
-  header > .container > #title > h1 {
-    font-size: 1.25em;
-  }
-} */
-
 /* Full size navbar */
 @media screen and (min-width: 800px) {
     #menu-button {
@@ -218,6 +197,7 @@ footer > .container {
         bottom: 0;
         left: 0;
         overflow: hidden;
+        background-color: var(--header);
         height: calc(100vh - 64px);
         height: calc(var(--vh, 1vh) * 100 - 64px);
         width: 100vw;

@@ -28,8 +28,8 @@
     top: 30%;
     padding: 1.5rem 0.5rem;
     color: white;
-    background: var(--bg1);
-    border-color: var(--bg1);
+    background: var(--accent);
+    border-color: var(--accent);
     opacity: 30%;
     font-weight: bold;
     user-select: none;
@@ -50,7 +50,7 @@
 
 #animal > #details {
     border-radius: 1rem;
-    background-color: var(--secondary);
+    background-color: var(--modal);
     color: var(--text);
     display: flex;
     flex-flow: column;
